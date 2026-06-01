@@ -145,6 +145,21 @@
   .agent-split { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
   .arrow-line { font-family:'SF Mono',monospace; font-size:9.5pt; color:#6ee7b7; text-align:center; margin-top:10px; }
 
+  /* ---------- checklist (sec 7) ---------- */
+  .ckgrid { columns:2; column-gap:20px; margin-top:10px; }
+  .ckgrp { break-inside:avoid; border:1px solid var(--line); border-radius:10px; margin-bottom:11px; overflow:hidden; }
+  .ckgrp .gh { display:flex; align-items:center; gap:7px; padding:6px 11px; font-weight:800; font-size:9.2pt; color:#fff; }
+  .ckgrp .gh .gn { width:17px; height:17px; border-radius:5px; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:8.5pt; }
+  .ckgrp.c1 .gh{background:var(--navy2);} .ckgrp.c2 .gh{background:var(--dante);} .ckgrp.c3 .gh{background:#7c3aed;}
+  .ckgrp.c4 .gh{background:var(--gold);} .ckgrp.c5 .gh{background:var(--holly);} .ckgrp.c6 .gh{background:var(--done);}
+  .ckgrp ul { list-style:none; margin:0; padding:6px 11px 8px; }
+  .ckgrp li { position:relative; padding:3px 0 3px 22px; font-size:8.6pt; border-bottom:1px dashed var(--line); }
+  .ckgrp li:last-child { border-bottom:none; }
+  .ckgrp li::before { content:""; position:absolute; left:0; top:3px; width:12px; height:12px; border:1.6px solid var(--navy2); border-radius:3px; background:#fff; }
+  .ckgrp li b { color:var(--navy); }
+  .ckgrp .fn { font-family:'SF Mono',monospace; font-size:7.6pt; background:var(--gold-bg); color:#7a5512; padding:0 4px; border-radius:3px; }
+  .ckgrp .fold { font-weight:700; color:var(--navy2); }
+
   /* ---------- print ---------- */
   @media print {
     body { background:#fff; padding:0; font-size:10pt; }
@@ -189,6 +204,7 @@
         <li><a href="#flow">The workflow flowchart — Dante &amp; Holly</a><br><span class="tn">Both lanes, the approval gates, and the handoffs.</span></li>
         <li><a href="#solo-front">Holly solo — front end, from scratch</a><br><span class="tn">Starting a brand-new disclosure on your own.</span></li>
         <li><a href="#solo-back">Holly solo — back end, finishing a started draft</a><br><span class="tn">Picking up a document Dante has already begun.</span></li>
+        <li><a href="#checklist">The disclosure checklist</a><br><span class="tn">The self-review quality gate, fillable and ready to print.</span></li>
         <li><a href="#agentic">Agentic workflows — down the road</a><br><span class="tn">How automation fits once the process is proven.</span></li>
       </ol>
     </div>
@@ -369,7 +385,7 @@ style HOLLY fill:#edfaf8,stroke:#0e7c86,stroke-width:1.5px,color:#0a5b63;
       <li><b>Save it into</b> <span class="fold">📁 Shared / To Be Disclosed.</span> This is its home while you write.</li>
       <li><b>Draft in Claude Teams</b>, working from the template and the matter facts. Let Claude do the heavy lifting on structure and first language.</li>
       <li><b>Collect exhibits as you go</b> — keep them together so they're ready to file.</li>
-      <li><b>Self-review</b> against the disclosure checklist. Fix anything before it moves.</li>
+      <li><b>Self-review</b> against the disclosure checklist (<b>Section 7</b>). Fix anything before it moves.</li>
       <li><b>Move the draft to</b> <span class="fold">📁 Disclosures</span>, and put every exhibit into <span class="fold">📁 Disclosures / Attachments.</span></li>
       <li><b>Do your approval pass.</b> You're both author and approver here — keep your initial <span class="fn">(L)</span> as the sign-off on the trail.</li>
       <li><b>Move the finalised document to</b> <span class="fold">📁 Done.</span> Nothing changes after this.</li>
@@ -385,7 +401,7 @@ style HOLLY fill:#edfaf8,stroke:#0e7c86,stroke-width:1.5px,color:#0a5b63;
     <ol class="steplist holly">
       <li><b>Find Dante's draft</b> in <span class="fold">📁 Shared / To Be Disclosed</span> — its name ends with <span class="fn">(D)</span>.</li>
       <li><b>Open it in Claude Teams</b> and <b>read Dante's notes first</b> — he'll have flagged gaps or questions for you.</li>
-      <li><b>Review the draft</b> against the matter and the checklist.</li>
+      <li><b>Review the draft</b> against the matter and the checklist (<b>Section 7</b>).</li>
       <li><b>Make your edits in the same file</b>, then <b>append your initial</b>: <span class="fn">(D)</span> → <span class="fn">(D L)</span></li>
       <li><b>Add a short revision note</b> for anything significant you changed or need confirmed.</li>
       <li><b>If you need Dante to action something</b>, that's a handoff back — leave a note and let him pick it up (he'll append → <span class="fn">(D L D)</span>). Otherwise, carry on.</li>
@@ -395,9 +411,76 @@ style HOLLY fill:#edfaf8,stroke:#0e7c86,stroke-width:1.5px,color:#0a5b63;
     </ol>
   </section>
 
-  <!-- ===== 7. AGENTIC ===== -->
+  <!-- ===== 7. CHECKLIST ===== -->
+  <section id="checklist">
+    <div class="sec-wrap"><div class="sec-kick">Section 7</div><h2 class="sec">The disclosure checklist</h2></div>
+    <div class="rule"></div>
+    <div class="callout c-gold"><div class="cl">When to use this</div><p>Run this at the <b>self-review gate</b> — before any document leaves “To Be Disclosed”. Tick every box; if one can't be ticked, it isn't ready. The process items (naming, folders, sign-off) are non-negotiable; the substantive items are prompts — final judgement on legal sufficiency always rests with the lawyer. A standalone fillable copy is available to print and keep at your desk.</p></div>
+    <div class="ckgrid">
+      <div class="ckgrp c1">
+        <div class="gh"><span class="gn">1</span> Intake &amp; setup</div>
+        <ul>
+          <li>Matter open in <b>Clio</b>; client &amp; matter confirmed.</li>
+          <li>Disclosure <b>type</b> and <b>deadline</b> identified.</li>
+          <li>All source documents gathered.</li>
+          <li>Working from the approved <b>template / playbook</b>.</li>
+        </ul>
+      </div>
+      <div class="ckgrp c2">
+        <div class="gh"><span class="gn">2</span> Naming &amp; filing</div>
+        <ul>
+          <li>Named to convention: <span class="fn">YYYYMMDD description (initials)</span></li>
+          <li>Date first; description plain lowercase.</li>
+          <li>Initials reflect who has touched it.</li>
+          <li>Saved in the correct folder for its <b>stage</b>.</li>
+          <li>One file — no duplicate versions.</li>
+        </ul>
+      </div>
+      <div class="ckgrp c3">
+        <div class="gh"><span class="gn">3</span> Content &amp; accuracy</div>
+        <ul>
+          <li>All required <b>sections</b> present.</li>
+          <li>Names, dates &amp; references correct.</li>
+          <li>Figures &amp; facts verified against <b>source</b>.</li>
+          <li>Cross-references &amp; exhibit labels match.</li>
+          <li>No placeholders or “TBC” left in.</li>
+          <li>Read end-to-end at least once.</li>
+        </ul>
+      </div>
+      <div class="ckgrp c4">
+        <div class="gh"><span class="gn">4</span> Exhibits &amp; attachments</div>
+        <ul>
+          <li>Every referenced exhibit is attached.</li>
+          <li>Stored in <span class="fold">📁 Disclosures / Attachments</span>.</li>
+          <li>Each exhibit labelled &amp; dated.</li>
+          <li>No stray or privileged docs included.</li>
+        </ul>
+      </div>
+      <div class="ckgrp c5">
+        <div class="gh"><span class="gn">5</span> Review &amp; revision trail</div>
+        <ul>
+          <li>A <b>note</b> recorded for each significant change.</li>
+          <li>Initials <b>appended</b> (not replaced).</li>
+          <li>Outstanding questions flagged or resolved.</li>
+          <li>Any handoff back is clearly noted.</li>
+        </ul>
+      </div>
+      <div class="ckgrp c6">
+        <div class="gh"><span class="gn">6</span> Approval &amp; filing</div>
+        <ul>
+          <li>Lawyer review complete; <b>approval</b> in the filename.</li>
+          <li>No tracked changes / comments in the final.</li>
+          <li>Moved to <span class="fold">📁 Done</span> — locked.</li>
+          <li>Final copy <b>exported to Clio</b>.</li>
+          <li>Filed / served by deadline; confirmation saved.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8. AGENTIC ===== -->
   <section id="agentic">
-    <div class="sec-wrap"><div class="sec-kick">Section 7</div><h2 class="sec">Agentic workflows — down the road</h2></div>
+    <div class="sec-wrap"><div class="sec-kick">Section 8</div><h2 class="sec">Agentic workflows — down the road</h2></div>
     <div class="rule"></div>
     <div class="callout c-gold"><div class="cl">The one rule</div><p>An agent doesn't <i>invent</i> the process — it <i>executes</i> the one you've already proven works. It's the automation version of this playbook, and it only arrives <b>after</b> the manual process is stable (roughly 2–3 disclosures in).</p></div>
 

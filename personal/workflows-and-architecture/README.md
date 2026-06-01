@@ -14,12 +14,12 @@ fill in the case-specific detail.
 - [Debugging](./playbooks/debugging.md)
 - [Debrief](./playbooks/debrief.md) — runs in Personal *after* the audit (see below)
 
-## Build & debug
+## Where the messy code lives
 
-- [build-and-debug/](./build-and-debug/) — the **messy sandbox** where
-  disclosure code is actually written and debugged. Proven, generalized work is
-  **promoted** from here into `playbooks/`. This is where the build-and-debug
-  mess lives — deliberately, so cases and the clean library stay tidy.
+Build-and-debug work is **not** here — it has its own standalone Personal Cowork
+project: [`../build-and-debug/`](../build-and-debug/). Code is written and
+debugged there, then **promoted** into the `playbooks/` library here once it's
+proven. This project stays clean and reusable; the sandbox absorbs the mess.
 
 ## The learning loop
 

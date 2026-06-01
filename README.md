@@ -18,9 +18,10 @@ PERSONAL
 ├── Disclosure Strategy        (Chat Project)   → personal/disclosure-strategy/
 │     └── debriefs/            post-case "feelings & learning" → personal/disclosure-strategy/debriefs/
 ├── Personal Explorations      (Chat Project)   → personal/personal-explorations/
-└── Workflows & Architecture   (Cowork Project) → personal/workflows-and-architecture/
-      ├── playbooks/           the reusable library (incl. debrief)
-      └── build-and-debug/     messy code sandbox → promoted into playbooks/
+├── Workflows & Architecture   (Cowork Project) → personal/workflows-and-architecture/
+│     └── playbooks/           the reusable library (incl. debrief)
+└── Build & Debug              (Cowork Project) → personal/build-and-debug/
+      └── messy code sandbox → promoted into Workflows & Architecture
 
 TEAMS
 ├── Running Disclosures        (Chat Project)   → teams/running-disclosures/        (master tracker)
@@ -38,9 +39,10 @@ TEAMS
 ## How the pieces connect
 
 - **Personal → Workflows & Architecture** holds the *reusable* playbooks
-  (pre-run review, run, audit, debugging, debrief) — the library. Its
-  `build-and-debug/` sandbox is where messy code is written, then **promoted**
-  into the clean playbooks.
+  (pre-run review, run, audit, debugging, debrief) — the clean library.
+- **Personal → Build & Debug** is a separate Cowork project: the messy sandbox
+  where disclosure code is written and debugged, then **promoted** into the
+  Workflows & Architecture library once proven.
 - **Teams → Running Disclosures** is the master tracker: one index, one status
   view across every active and planned case.
 - **Teams → Disclosure [Case Name]** is a per-case workspace. Copy

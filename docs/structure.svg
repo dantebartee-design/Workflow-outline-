@@ -50,48 +50,66 @@
   <rect x="30" y="98" width="1120" height="372" rx="14" fill="#eef0fb" stroke="#c7cdf5"/>
   <text x="52" y="128" class="zone-label" fill="#4f46e5">PERSONAL</text>
 
+  <!-- promote arc: Build & Debug -> Workflows & Architecture -->
+  <path d="M725,150 C725,130 997,130 997,150" fill="none" stroke="#0e9488" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="861" y="125" text-anchor="middle" class="leafsub">promote →</text>
+
   <!-- Disclosure Strategy -->
   <g transform="translate(52,150)">
-    <rect width="340" height="44" rx="9" fill="#4f46e5"/>
+    <rect width="258" height="44" rx="9" fill="#4f46e5"/>
     <text x="16" y="22" class="proj">Disclosure Strategy</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT</text>
-    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
-    <text x="30" y="82" class="leaf">• Vision for Disclosure 1</text>
-    <text x="30" y="106" class="leaf">• Vision for Disclosure 2</text>
-    <text x="30" y="130" class="leaf">• Notes on approach</text>
-    <line x1="30" y1="146" x2="296" y2="146" stroke="#e5e7eb"/>
-    <text x="30" y="170" class="leafhi">• Debrief (per case)</text>
-    <text x="44" y="190" class="leaf">feelings &amp; learning — comes</text>
-    <text x="44" y="208" class="leaf">home after the Teams audit</text>
-    <text x="30" y="236" class="leafmuted">the reflective home for disclosures</text>
+    <rect x="6" y="56" width="246" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
+    <text x="18" y="82" class="leaf">• Vision for Disclosure 1</text>
+    <text x="18" y="106" class="leaf">• Vision for Disclosure 2</text>
+    <text x="18" y="130" class="leaf">• Notes on approach</text>
+    <line x1="18" y1="146" x2="240" y2="146" stroke="#e5e7eb"/>
+    <text x="18" y="170" class="leafhi">• Debrief (per case)</text>
+    <text x="32" y="190" class="leaf">feelings &amp; learning —</text>
+    <text x="32" y="208" class="leaf">home after the audit</text>
+    <text x="18" y="236" class="leafmuted">reflective home for cases</text>
   </g>
 
   <!-- Personal Explorations -->
-  <g transform="translate(420,150)">
-    <rect width="340" height="44" rx="9" fill="#4f46e5"/>
+  <g transform="translate(324,150)">
+    <rect width="258" height="44" rx="9" fill="#4f46e5"/>
     <text x="16" y="22" class="proj">Personal Explorations</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT</text>
-    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
-    <text x="30" y="82" class="leaf">• Quantum Theory</text>
-    <text x="30" y="106" class="leaf">• Books &amp; Reading</text>
-    <text x="30" y="130" class="leaf">• Life &amp; Reflection</text>
-    <text x="30" y="236" class="leafmuted">open-ended, off to the side</text>
+    <rect x="6" y="56" width="246" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
+    <text x="18" y="82" class="leaf">• Quantum Theory</text>
+    <text x="18" y="106" class="leaf">• Books &amp; Reading</text>
+    <text x="18" y="130" class="leaf">• Life &amp; Reflection</text>
+    <text x="18" y="236" class="leafmuted">open-ended, off to the side</text>
   </g>
 
-  <!-- Workflows & Architecture -->
-  <g transform="translate(788,150)">
-    <rect width="340" height="44" rx="9" fill="#0e9488"/>
-    <text x="16" y="22" class="proj">Workflows &amp; Architecture</text>
-    <text x="16" y="37" class="ptype">COWORK PROJECT — the library</text>
-    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#bfe7e2"/>
-    <text x="30" y="82" class="leafsub">playbooks/ — reusable library</text>
-    <text x="30" y="104" class="leaf">• pre-run · run · audit</text>
-    <text x="30" y="124" class="leaf">• debrief · debugging</text>
-    <line x1="30" y1="140" x2="296" y2="140" stroke="#e5e7eb"/>
-    <text x="30" y="166" class="leafsub">build-and-debug/ — sandbox</text>
-    <text x="30" y="188" class="leaf">• messy code lives here…</text>
-    <text x="30" y="208" class="leaf">• …then promoted ↑ to playbooks</text>
-    <text x="30" y="236" class="leafmuted">canonical source for every case</text>
+  <!-- Build & Debug (sandbox) -->
+  <g transform="translate(596,150)">
+    <rect width="258" height="44" rx="9" fill="#0e9488"/>
+    <text x="16" y="22" class="proj">Build &amp; Debug</text>
+    <text x="16" y="37" class="ptype">COWORK PROJECT — sandbox</text>
+    <rect x="6" y="56" width="246" height="194" rx="8" fill="#ffffff" stroke="#bfe7e2"/>
+    <text x="18" y="82" class="leafsub">messy code lives here</text>
+    <text x="18" y="106" class="leaf">• spikes · experiments</text>
+    <text x="18" y="130" class="leaf">• throwaway scripts</text>
+    <line x1="18" y1="146" x2="240" y2="146" stroke="#e5e7eb"/>
+    <text x="18" y="170" class="leaf">when proven, promote →</text>
+    <text x="32" y="190" class="leaf">into the library</text>
+    <text x="18" y="236" class="leafmuted">the home for build &amp; debug</text>
+  </g>
+
+  <!-- Workflows & Architecture (library) -->
+  <g transform="translate(868,150)">
+    <rect width="258" height="44" rx="9" fill="#0e9488"/>
+    <text x="16" y="21" class="proj" font-size="15">Workflows &amp; Architecture</text>
+    <text x="16" y="37" class="ptype">COWORK PROJECT — library</text>
+    <rect x="6" y="56" width="246" height="194" rx="8" fill="#ffffff" stroke="#bfe7e2"/>
+    <text x="18" y="82" class="leafsub">playbooks/ — the library</text>
+    <text x="18" y="106" class="leaf">• pre-run · run · audit</text>
+    <text x="18" y="130" class="leaf">• debrief · debugging</text>
+    <line x1="18" y1="146" x2="240" y2="146" stroke="#e5e7eb"/>
+    <text x="18" y="170" class="leafsub">← receives promotions</text>
+    <text x="32" y="190" class="leaf">from Build &amp; Debug</text>
+    <text x="18" y="236" class="leafmuted">every case draws from here</text>
   </g>
 
   <!-- ============ TEAMS ZONE ============ -->
@@ -136,9 +154,9 @@
 
   <!-- Cross-zone loop arrows -->
   <!-- DOWN: library draws into cases -->
-  <path d="M958,400 L958,466 L610,466 L610,540" fill="none" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
-  <rect x="612" y="472" width="150" height="20" rx="10" fill="#f7f8fb"/>
-  <text x="618" y="487" class="legtxt">library → draws into case</text>
+  <path d="M997,400 L997,468 L590,468 L590,540" fill="none" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="590" y="474" width="150" height="20" rx="10" fill="#f7f8fb"/>
+  <text x="596" y="489" class="legtxt">library → draws into case</text>
 
   <!-- ============ LEARNING LOOP PANEL ============ -->
   <rect x="30" y="812" width="1120" height="218" rx="14" fill="#ffffff" stroke="#e5e7eb"/>

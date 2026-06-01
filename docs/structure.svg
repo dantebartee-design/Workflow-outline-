@@ -70,18 +70,20 @@
   <!-- Disclosure Strategy -->
   <g transform="translate(52,150)">
     <rect width="258" height="44" rx="9" fill="#4f46e5"/>
-    <text x="16" y="22" class="proj">Disclosure Strategy</text>
-    <text x="16" y="37" class="ptype">CHAT PROJECT</text>
+    <text x="30" y="22" class="proj">Disclosure Strategy</text>
+    <text x="30" y="37" class="ptype">CHAT PROJECT</text>
     <rect x="6" y="56" width="246" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
-    <text x="18" y="82" class="leaf">• Vision for Disclosure 1</text>
-    <text x="18" y="106" class="leaf">• Vision for Disclosure 2</text>
-    <text x="18" y="130" class="leaf">• Notes on approach</text>
-    <line x1="18" y1="146" x2="240" y2="146" stroke="#e5e7eb"/>
-    <text x="18" y="170" class="leafhi">• Debrief (per case)</text>
-    <circle cx="228" cy="166" r="11" fill="#d97706"/><text x="228" y="170" text-anchor="middle" class="stepnum">6</text>
-    <text x="32" y="190" class="leaf">feelings &amp; learning —</text>
-    <text x="32" y="208" class="leaf">home after the audit</text>
-    <text x="18" y="236" class="leafsub">★ North Star — informs all steps</text>
+    <text x="18" y="80" class="leafhi">★ Vision — the North Star</text>
+    <text x="18" y="102" class="leaf">• Vision for Disclosure 1</text>
+    <text x="18" y="122" class="leaf">• Vision for Disclosure 2</text>
+    <text x="18" y="142" class="leaf">• Notes on approach</text>
+    <!-- debrief sub-box (step 6) — distinct compartment -->
+    <rect x="14" y="156" width="230" height="84" rx="7" fill="#eef0fb" stroke="#c7cdf5"/>
+    <circle cx="28" cy="172" r="10" fill="#d97706"/><text x="28" y="176" text-anchor="middle" class="stepnum" font-size="12">6</text>
+    <text x="44" y="177" class="leafhi">Debrief (per case)</text>
+    <text x="28" y="199" class="leaf">feelings &amp; learning,</text>
+    <text x="28" y="217" class="leaf">home after the audit</text>
+    <text x="28" y="234" class="leafsub" font-size="11">→ refines the vision (0)</text>
   </g>
   <circle cx="52" cy="150" r="13" fill="#d97706" stroke="#ffffff" stroke-width="2"/><text x="52" y="155" text-anchor="middle" class="stepnum">0</text>
 

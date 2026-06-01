@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Combined — front matter &amp; dividers</title>
+<style>
+  :root{
+    --navy:#0f2a47; --navy2:#1e4d7b; --dante:#2563eb; --purple:#7c3aed;
+    --holly:#0e7c86; --gold:#b07b1e; --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{ font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  @page{ size:A4 portrait; margin:0; }
+  .sheet{ width:210mm; height:297mm; position:relative; overflow:hidden; page-break-after:always; }
+  .sheet:last-child{ page-break-after:auto; }
+
+  /* ---------- cover ---------- */
+  .cover{ background:linear-gradient(150deg,#0b2138 0%,#13386a 55%,#0e7c86 130%); color:#fff; padding:34mm 26mm; }
+  .cover .kicker{ text-transform:uppercase; letter-spacing:5px; font-size:11pt; opacity:.85; }
+  .cover h1{ font-size:40pt; font-weight:800; letter-spacing:-1px; line-height:1.05; margin:14px 0 10px; }
+  .cover .sub{ font-size:15pt; font-weight:600; opacity:.95; max-width:150mm; }
+  .cover .set{ margin-top:40px; border-top:1px solid rgba(255,255,255,.25); padding-top:22px; }
+  .cover .set .lbl{ text-transform:uppercase; letter-spacing:2px; font-size:9pt; opacity:.75; margin-bottom:12px; }
+  .cover .set ol{ margin:0; padding-left:0; list-style:none; counter-reset:c; }
+  .cover .set li{ counter-increment:c; display:flex; align-items:center; gap:13px; padding:7px 0; font-size:12.5pt; }
+  .cover .set li::before{ content:counter(c); width:24px; height:24px; border-radius:6px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:10pt; }
+  .cover .meta{ position:absolute; bottom:26mm; left:26mm; right:26mm; font-size:9.5pt; opacity:.75; }
+
+  /* ---------- contents ---------- */
+  .contents{ padding:30mm 26mm; }
+  .contents .kicker{ text-transform:uppercase; letter-spacing:3px; font-size:9pt; color:var(--gold); font-weight:800; }
+  .contents h2{ font-size:26pt; color:var(--navy); margin:6px 0 4px; }
+  .contents .lead{ color:var(--muted); font-size:11pt; margin:0 0 22px; }
+  .toc-item{ display:flex; align-items:flex-start; gap:16px; padding:15px 0; border-bottom:1px solid var(--line); }
+  .toc-item .n{ flex:0 0 auto; width:34px; height:34px; border-radius:9px; color:#fff; font-weight:800; font-size:14pt; display:flex; align-items:center; justify-content:center; }
+  .toc-item.d1 .n{ background:var(--navy2); } .toc-item.d2 .n{ background:var(--dante); }
+  .toc-item.d3 .n{ background:var(--purple); } .toc-item.d4 .n{ background:var(--holly); }
+  .toc-item.d5 .n{ background:var(--gold); }
+  .toc-item .body{ flex:1; }
+  .toc-item .t{ font-size:13.5pt; font-weight:700; color:var(--navy); }
+  .toc-item .d{ font-size:10pt; color:var(--muted); margin-top:2px; }
+  .toc-item .pg{ flex:0 0 auto; text-align:right; font-size:10pt; color:var(--muted); padding-top:4px; }
+  .toc-item .pg b{ display:block; font-size:17pt; color:var(--navy); font-weight:800; }
+  .contents .note{ margin-top:24px; background:var(--bg); border:1px solid var(--line); border-radius:11px; padding:14px 18px; font-size:9.6pt; color:var(--muted); }
+  .contents .note b{ color:var(--navy); }
+
+  /* ---------- dividers ---------- */
+  .divider{ display:flex; flex-direction:column; justify-content:center; padding:0 30mm; color:#fff; }
+  .divider.d1{ background:linear-gradient(135deg,#16365f,#1e4d7b); }
+  .divider.d2{ background:linear-gradient(135deg,#1d4ed8,#2563eb); }
+  .divider.d3{ background:linear-gradient(135deg,#6d28d9,#7c3aed); }
+  .divider.d4{ background:linear-gradient(135deg,#0a5b63,#0e7c86); }
+  .divider.d5{ background:linear-gradient(135deg,#8a5f17,#b07b1e); }
+  .divider .docno{ font-size:13pt; text-transform:uppercase; letter-spacing:6px; opacity:.8; }
+  .divider .bignum{ font-size:150pt; font-weight:800; line-height:.9; letter-spacing:-4px; opacity:.9; }
+  .divider h3{ font-size:30pt; font-weight:800; letter-spacing:-.6px; margin:6px 0 12px; max-width:150mm; }
+  .divider .desc{ font-size:13pt; opacity:.92; max-width:140mm; line-height:1.5; }
+  .divider .fmt{ position:absolute; bottom:24mm; left:30mm; font-size:9.5pt; opacity:.8; text-transform:uppercase; letter-spacing:2px; }
+  .divider .wm{ position:absolute; right:-10mm; bottom:-20mm; font-size:330pt; font-weight:800; opacity:.07; line-height:1; }
+</style>
+</head>
+<body>
+
+  <!-- 1: COVER -->
+  <div class="sheet cover">
+    <div class="kicker">Disclosure Workflow · Internal</div>
+    <h1>The Complete<br>Document Set</h1>
+    <div class="sub">File naming, folders, the Dante &amp; Holly workflow, the scenario transition, the checklist, and the path to automation — bound into one reference.</div>
+    <div class="set">
+      <div class="lbl">Five documents, in order</div>
+      <ol>
+        <li>Scenario Transition Guide</li>
+        <li>Dante &amp; Holly Workflow Flowchart</li>
+        <li>Disclosure System Overview</li>
+        <li>The Master Playbook</li>
+        <li>Disclosure Checklist</li>
+      </ol>
+    </div>
+    <div class="meta">Built to print and to hand to anyone stepping in · Section dividers and bookmarks included for navigation.</div>
+  </div>
+
+  <!-- 2: CONTENTS -->
+  <div class="sheet contents">
+    <div class="kicker">Combined Reference</div>
+    <h2>Contents</h2>
+    <p class="lead">Each document begins with a coloured divider page. Use the bookmarks panel in your PDF viewer to jump straight to any section.</p>
+
+    <div class="toc-item d1"><div class="n">1</div><div class="body"><div class="t">Scenario Transition Guide</div><div class="d">From Clio-centric today to Claude Teams as the drafting hub.</div></div><div class="pg">page<b>3</b></div></div>
+    <div class="toc-item d2"><div class="n">2</div><div class="body"><div class="t">Dante &amp; Holly Workflow Flowchart</div><div class="d">Both swimlanes, the approval gates, and the handoffs.</div></div><div class="pg">page<b>5</b></div></div>
+    <div class="toc-item d3"><div class="n">3</div><div class="body"><div class="t">Disclosure System Overview</div><div class="d">Naming convention, folder structure, and revision tracking.</div></div><div class="pg">page<b>8</b></div></div>
+    <div class="toc-item d4"><div class="n">4</div><div class="body"><div class="t">The Master Playbook</div><div class="d">Everything, plus solo instructions, checklist, and automation.</div></div><div class="pg">page<b>11</b></div></div>
+    <div class="toc-item d5"><div class="n">5</div><div class="body"><div class="t">Disclosure Checklist</div><div class="d">The fillable self-review quality gate.</div></div><div class="pg">page<b>23</b></div></div>
+
+    <div class="note"><b>Tip:</b> the Master Playbook (Document 4) already contains compact versions of the other documents. The standalone copies here are the print-optimised originals — Document 1 is landscape; the rest are portrait.</div>
+  </div>
+
+  <!-- DIVIDERS -->
+  <div class="sheet divider d1"><div class="wm">1</div><div class="docno">Document One</div><div class="bignum">1</div><h3>Scenario Transition Guide</h3><div class="desc">How Holly moves from drafting inside Clio to drafting primarily in Claude Teams — with Clio as the final system of record.</div><div class="fmt">Landscape · 1 page</div></div>
+
+  <div class="sheet divider d2"><div class="wm">2</div><div class="docno">Document Two</div><div class="bignum">2</div><h3>Dante &amp; Holly Workflow Flowchart</h3><div class="desc">Two swimlanes from start to finish: the paralegal drafts, the lawyer approves, with decision gates and clearly marked handoffs.</div><div class="fmt">Portrait · 2 pages</div></div>
+
+  <div class="sheet divider d3"><div class="wm">3</div><div class="docno">Document Three</div><div class="bignum">3</div><h3>Disclosure System Overview</h3><div class="desc">The desk reference: file-naming ground rules, the folder hierarchy, how documents flow, and a worked revision-tracking example.</div><div class="fmt">Portrait · 2 pages</div></div>
+
+  <div class="sheet divider d4"><div class="wm">4</div><div class="docno">Document Four</div><div class="bignum">4</div><h3>The Master Playbook</h3><div class="desc">The comprehensive guide — ground rules, scenario, flowchart, solo front-end and back-end instructions, the checklist, and agentic workflows.</div><div class="fmt">Portrait · 11 pages</div></div>
+
+  <div class="sheet divider d5"><div class="wm">5</div><div class="docno">Document Five</div><div class="bignum">5</div><h3>Disclosure Checklist</h3><div class="desc">A fillable, print-friendly quality gate to run at self-review, before any document leaves “To Be Disclosed”.</div><div class="fmt">Portrait · 1 page</div></div>
+
+</body>
+</html>

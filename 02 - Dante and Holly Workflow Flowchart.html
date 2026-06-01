@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Workflow Flowchart — Dante &amp; Holly</title>
+<style>
+  :root {
+    --navy:#0f2a47; --navy2:#1e4d7b;
+    --holly:#0e7c86; --holly-bg:#e1f3f0;
+    --dante:#2563eb; --dante-bg:#e8f0fe;
+    --gold:#b07b1e; --gold-bg:#fbf0d9;
+    --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body {
+    font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink);
+    background:#eef1f5; font-size:11pt; line-height:1.45; padding:24px;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { max-width:1000px; margin:0 auto; background:#fff; border-radius:16px; padding:28px 32px; box-shadow:0 2px 18px rgba(15,42,71,.08); }
+  header.top { text-align:center; margin-bottom:14px; }
+  header.top .eyebrow { text-transform:uppercase; letter-spacing:3px; font-size:8pt; color:var(--gold); font-weight:800; }
+  header.top h1 { margin:5px 0 4px; font-size:22pt; color:var(--navy); }
+  header.top p { margin:0 auto; max-width:740px; color:var(--muted); font-size:10pt; }
+
+  .legend { display:flex; gap:18px; justify-content:center; margin:16px 0 18px; flex-wrap:wrap; font-size:9.5pt; }
+  .legend span { display:flex; align-items:center; gap:7px; font-weight:600; }
+  .legend .sw { width:16px; height:16px; border-radius:4px; border-width:2px; border-style:solid; }
+  .sw.d { background:var(--dante-bg); border-color:var(--dante); }
+  .sw.h { background:var(--holly-bg); border-color:var(--holly); }
+  .sw.o { background:var(--gold-bg); border-color:var(--gold); }
+  .sw.dec { background:#fff; border-color:var(--navy); transform:rotate(45deg); width:13px; height:13px; }
+
+  .diagram { border:1px solid var(--line); border-radius:14px; padding:14px; background:var(--bg); overflow-x:auto; }
+  .mermaid { display:flex; justify-content:center; }
+
+  .fallback { font-size:9pt; color:var(--muted); text-align:center; margin-top:10px; font-style:italic; }
+  .keypoints { margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .kp { border:1px solid var(--line); border-radius:11px; padding:11px 14px; }
+  .kp h3 { margin:0 0 4px; font-size:10pt; color:var(--navy); }
+  .kp p { margin:0; font-size:9.2pt; color:var(--muted); }
+  .kp.gate { border-left:4px solid var(--gold); }
+  .kp.name { border-left:4px solid var(--dante); }
+  .kp.fold { border-left:4px solid var(--holly); }
+  .kp.done { border-left:4px solid #059669; }
+
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; border-radius:0; max-width:none; padding:8mm; }
+    @page { size:A4 portrait; margin:9mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">Process Flowchart</div>
+    <h1>Dante &amp; Holly — Disclosure Workflow</h1>
+    <p>Two swimlanes, start to finish: the paralegal drafts and the lawyer approves. Diamonds are decision points; gold hexagons are handoffs where one person must finish before the other continues.</p>
+  </header>
+
+  <div class="legend">
+    <span><span class="sw d"></span> Dante (paralegal)</span>
+    <span><span class="sw h"></span> Holly (lawyer)</span>
+    <span><span class="sw o"></span> Handoff point</span>
+    <span><span class="sw dec"></span> Decision / approval</span>
+  </div>
+
+  <div class="diagram">
+    <pre class="mermaid">
+flowchart TB
+
+subgraph DANTE["🧑‍💼 DANTE · Paralegal"]
+  direction TB
+  D1(["Start: new disclosure assigned"])
+  D2["Create document &amp; apply naming convention<br/><b>20260601 initial disclosure statement (D)</b>"]
+  D3[/"Save to 📁 Shared / To&nbsp;Be&nbsp;Disclosed"/]
+  D4["Draft in Claude Teams<br/>using the playbook"]
+  D5["Self-review against checklist"]
+  D6{"Draft ready<br/>for Holly?"}
+  D7["Revise per Holly's notes<br/>append initials → <b>(D L D)</b>"]
+end
+
+HO1{{"🤝 HANDOFF<br/>Ready for review"}}
+HO2{{"🤝 HANDOFF BACK<br/>Revisions requested"}}
+
+subgraph HOLLY["⚖️ HOLLY · Lawyer"]
+  direction TB
+  H1["Review Dante's draft<br/>read his notes"]
+  H2{"Approve?"}
+  H3["Add revision notes<br/>append initials → <b>(D L)</b>"]
+  H4["Approve &amp; finalise"]
+  H5[/"Move → 📁 Disclosures<br/>exhibits → 📁 Disclosures/Attachments"/]
+  H6[/"Move final → 📁 Done"/]
+  H7["Export to Clio<br/>(system of record)"]
+  H8(["✅ Disclosure filed / served"])
+end
+
+D1 --> D2 --> D3 --> D4 --> D5 --> D6
+D6 -- "No, keep working" --> D4
+D6 -- "Yes" --> HO1
+HO1 --> H1 --> H2
+H2 -- "Needs changes" --> H3 --> HO2
+HO2 --> D7 --> D4
+H2 -- "Approved" --> H4 --> H5 --> H6 --> H7 --> H8
+
+classDef dante fill:#e8f0fe,stroke:#2563eb,stroke-width:1.5px,color:#0f2a47;
+classDef holly fill:#e1f3f0,stroke:#0e7c86,stroke-width:1.5px,color:#0f2a47;
+classDef handoff fill:#fbf0d9,stroke:#b07b1e,stroke-width:2px,color:#5a3d00;
+classDef gate fill:#ffffff,stroke:#0f2a47,stroke-width:1.5px,color:#0f2a47;
+classDef startend fill:#0f2a47,stroke:#0f2a47,color:#ffffff;
+
+class D2,D3,D4,D5,D7 dante;
+class H1,H3,H4,H5,H6,H7 holly;
+class HO1,HO2 handoff;
+class D6,H2 gate;
+class D1,H8 startend;
+
+style DANTE fill:#f3f7fd,stroke:#2563eb,stroke-width:1.5px,color:#1d4ed8;
+style HOLLY fill:#edfaf8,stroke:#0e7c86,stroke-width:1.5px,color:#0a5b63;
+    </pre>
+  </div>
+  <div class="fallback">If the diagram doesn't render, open this file in an up-to-date browser with an internet connection (the Mermaid renderer loads from a CDN).</div>
+
+  <div class="keypoints">
+    <div class="kp name"><h3>File naming is set up front</h3><p>Dante names the file the moment it's created — date, description, and his initial <b>(D)</b>. Every later touch appends an initial, building the revision trail.</p></div>
+    <div class="kp gate"><h3>Two approval gates</h3><p>Dante's "ready for Holly?" check, and Holly's "approve?" decision. Nothing moves forward until the person owning that gate signs off.</p></div>
+    <div class="kp fold"><h3>Folder moves mark progress</h3><p>To Be Disclosed → Disclosures (+ Attachments) → Done. The folder a document sits in always tells you its stage.</p></div>
+    <div class="kp done"><h3>Clio is the final destination</h3><p>Only the approved, finalised document is exported to Clio for filing/serving — the clean system of record.</p></div>
+  </div>
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Helvetica Neue, Segoe UI, Arial, sans-serif',
+      fontSize: '14px',
+      lineColor: '#5a6675',
+      primaryColor: '#f6f8fb',
+      primaryBorderColor: '#1e4d7b',
+      primaryTextColor: '#0f2a47'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', nodeSpacing: 40, rankSpacing: 45 }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scenario Transition Guide — Clio to Claude Teams</title>
+<style>
+  :root {
+    --navy:#0f2a47; --navy2:#1e4d7b;
+    --holly:#0e7c86; --holly-bg:#e1f3f0; --holly-bd:#9ad3cd;
+    --dante:#2563eb; --dante-bg:#e8f0fe; --dante-bd:#b9ccf6;
+    --handoff:#b07b1e; --handoff-bg:#fbf0d9; --handoff-bd:#ecd9a8;
+    --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body {
+    font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink);
+    background:#eef1f5; font-size:11pt; line-height:1.45; padding:24px;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { max-width:1100px; margin:0 auto; background:#fff; border-radius:16px; padding:30px 34px; box-shadow:0 2px 18px rgba(15,42,71,.08); }
+
+  header.top { text-align:center; margin-bottom:6px; }
+  header.top .eyebrow { text-transform:uppercase; letter-spacing:3px; font-size:8.5pt; color:var(--handoff); font-weight:800; }
+  header.top h1 { margin:6px 0 4px; font-size:24pt; color:var(--navy); letter-spacing:-.4px; }
+  header.top p { margin:0 auto; max-width:760px; color:var(--muted); font-size:10.5pt; }
+
+  .legend { display:flex; gap:18px; justify-content:center; margin:18px 0 22px; flex-wrap:wrap; }
+  .legend span { display:flex; align-items:center; gap:7px; font-size:9.5pt; font-weight:600; }
+  .legend .sw { width:15px; height:15px; border-radius:4px; }
+  .sw.h { background:var(--holly-bg); border:2px solid var(--holly); }
+  .sw.d { background:var(--dante-bg); border:2px solid var(--dante); }
+  .sw.o { background:var(--handoff-bg); border:2px solid var(--handoff); }
+
+  .compare { display:grid; grid-template-columns:1fr 92px 1fr; gap:0; align-items:stretch; }
+
+  .scn { border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .scn .sh { padding:13px 18px; color:#fff; }
+  .scn.one .sh { background:linear-gradient(120deg,#64748b,#475569); }
+  .scn.two .sh { background:linear-gradient(120deg,var(--navy),var(--navy2)); }
+  .scn .sh .tag { font-size:8pt; text-transform:uppercase; letter-spacing:2px; opacity:.85; }
+  .scn .sh h2 { margin:3px 0 2px; font-size:15pt; }
+  .scn .sh .hub { font-size:9pt; opacity:.92; }
+  .scn .body { padding:16px 16px 20px; }
+
+  /* vertical step list */
+  .vline { position:relative; padding-left:6px; }
+  .stp { position:relative; padding:0 0 4px 30px; margin-bottom:11px; }
+  .stp:last-child { margin-bottom:0; }
+  .stp::before {
+    content:attr(data-n); position:absolute; left:0; top:0;
+    width:22px; height:22px; border-radius:50%; font-size:9pt; font-weight:800;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  /* connector line */
+  .stp::after { content:""; position:absolute; left:10px; top:22px; bottom:-11px; width:2px; background:var(--line); }
+  .stp:last-child::after { display:none; }
+
+  .stp .box { border-radius:9px; padding:8px 11px; border:1px solid var(--line); }
+  .stp .box .t { font-weight:700; font-size:10pt; }
+  .stp .box .d { font-size:9pt; color:var(--muted); margin-top:1px; }
+
+  /* role coloring */
+  .holly .box { background:var(--holly-bg); border-color:var(--holly-bd); }
+  .holly::before { background:var(--holly); }
+  .dante .box { background:var(--dante-bg); border-color:var(--dante-bd); }
+  .dante::before { background:var(--dante); }
+  .handoff .box { background:var(--handoff-bg); border-color:var(--handoff-bd); }
+  .handoff::before { background:var(--handoff); content:"⇄"; font-size:11pt; }
+  .handoff .box .t { color:#7a5512; }
+
+  /* middle transition arrow */
+  .mid { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 6px; }
+  .mid .rail { writing-mode:vertical-rl; text-orientation:mixed; text-transform:uppercase; letter-spacing:3px; font-size:8pt; font-weight:800; color:var(--handoff); margin-bottom:10px; }
+  .mid .big-arrow { font-size:34pt; color:var(--handoff); line-height:1; }
+  .mid .phase { font-size:7.5pt; text-align:center; color:var(--muted); margin-top:8px; font-weight:600; }
+
+  .takeaway { margin-top:22px; background:var(--navy); color:#fff; border-radius:12px; padding:14px 20px; display:flex; gap:14px; align-items:center; }
+  .takeaway .ic { font-size:18pt; }
+  .takeaway .t b { font-weight:800; }
+  .takeaway .t { font-size:10pt; }
+
+  @media print {
+    body { background:#fff; padding:0; font-size:9pt; }
+    .page { box-shadow:none; border-radius:0; max-width:none; padding:5mm 6mm; }
+    @page { size:A4 landscape; margin:8mm; }
+    header.top { margin-bottom:2px; }
+    header.top h1 { font-size:18pt; }
+    header.top p { font-size:8.5pt; }
+    .legend { margin:8px 0 10px; }
+    .scn .body { padding:9px 12px 11px; }
+    .stp { margin-bottom:6px; }
+    .stp::after { bottom:-6px; }
+    .stp .box { padding:5px 10px; }
+    .stp .box .t { font-size:9pt; }
+    .stp .box .d { font-size:8pt; }
+    .scn .sh { padding:8px 16px; }
+    .takeaway { margin-top:10px; padding:9px 16px; }
+    .takeaway .t { font-size:9pt; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">Scenario Transition Guide</div>
+    <h1>From Clio-Centric to Claude Teams as the Drafting Hub</h1>
+    <p>How Holly's day-to-day evolves over time — from drafting inside Clio with occasional Claude help, to drafting primarily in Claude Teams with Clio as the final system of record.</p>
+  </header>
+
+  <div class="legend">
+    <span><span class="sw h"></span> Holly's tasks (lawyer)</span>
+    <span><span class="sw d"></span> Dante / system support (paralegal)</span>
+    <span><span class="sw o"></span> Handoff &amp; system moves</span>
+  </div>
+
+  <div class="compare">
+    <!-- SCENARIO ONE -->
+    <div class="scn one">
+      <div class="sh">
+        <div class="tag">Scenario One · Today</div>
+        <h2>Clio-Centric</h2>
+        <div class="hub">Hub: <b>Clio</b> &nbsp;·&nbsp; Claude: limited / ad-hoc</div>
+      </div>
+      <div class="body">
+        <div class="vline">
+          <div class="stp holly" data-n="1"><div class="box"><div class="t">Holly opens the matter in Clio</div><div class="d">Everything starts and lives in Clio.</div></div></div>
+          <div class="stp holly" data-n="2"><div class="box"><div class="t">Holly drafts directly in Clio / Word</div><div class="d">Manual drafting, document by document.</div></div></div>
+          <div class="stp dante" data-n="3"><div class="box"><div class="t">Dante supports with light Claude use</div><div class="d">Occasional research or a first pass — not the main tool.</div></div></div>
+          <div class="stp handoff" data-n="4"><div class="box"><div class="t">Drafts emailed / shared back and forth</div><div class="d">Revisions tracked manually; versions easy to lose.</div></div></div>
+          <div class="stp holly" data-n="5"><div class="box"><div class="t">Holly assembles the disclosure in Clio</div><div class="d">Final review and packaging happen in Clio.</div></div></div>
+          <div class="stp handoff" data-n="6"><div class="box"><div class="t">Filed / served from Clio</div><div class="d">Clio is both the workspace and the record.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDDLE TRANSITION -->
+    <div class="mid">
+      <div class="rail">The evolution over time</div>
+      <div class="big-arrow">➜</div>
+      <div class="phase">Drafting moves<br>out of Clio,<br>into Claude Teams.<br><br>Clio becomes<br>the destination,<br>not the workshop.</div>
+    </div>
+
+    <!-- SCENARIO TWO -->
+    <div class="scn two">
+      <div class="sh">
+        <div class="tag">Scenario Two · The goal</div>
+        <h2>Claude Teams–Centric</h2>
+        <div class="hub">Hub: <b>Claude Teams</b> &nbsp;·&nbsp; Clio: final destination</div>
+      </div>
+      <div class="body">
+        <div class="vline">
+          <div class="stp dante" data-n="1"><div class="box"><div class="t">Matter of record opened in Clio</div><div class="d">Clio still holds the official matter — intake unchanged.</div></div></div>
+          <div class="stp dante" data-n="2"><div class="box"><div class="t">Dante builds first drafts in Claude Teams</div><div class="d">Using the proven playbook + naming convention.</div></div></div>
+          <div class="stp holly" data-n="3"><div class="box"><div class="t">Holly drafts &amp; refines in Claude Teams</div><div class="d">Claude Teams is now her primary drafting hub.</div></div></div>
+          <div class="stp handoff" data-n="4"><div class="box"><div class="t">Revisions tracked by naming + folders</div><div class="d">Initials in the filename; documents move between folders.</div></div></div>
+          <div class="stp holly" data-n="5"><div class="box"><div class="t">Holly approves the final version</div><div class="d">One clear sign-off gate before anything leaves.</div></div></div>
+          <div class="stp handoff" data-n="6"><div class="box"><div class="t">Approved final exported to Clio</div><div class="d">Clio = system of record / final destination.</div></div></div>
+          <div class="stp handoff" data-n="7"><div class="box"><div class="t">Filed / served from Clio</div><div class="d">Clean separation: build in Claude, record in Clio.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <div class="ic">🎯</div>
+    <div class="t"><b>The shift in one line:</b> Clio stops being the place work <i>happens</i> and becomes the place finished work <i>lands</i>. The drafting, iteration, and collaboration move into Claude Teams — faster to produce, easier to track, and a clean record still lives in Clio.</div>
+  </div>
+</div>
+</body>
+</html>

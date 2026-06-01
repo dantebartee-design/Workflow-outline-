@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Disclosure Master Playbook</title>
+<style>
+  :root {
+    --navy:#0f2a47; --navy2:#1e4d7b;
+    --holly:#0e7c86; --holly-bg:#e1f3f0; --holly-bd:#9ad3cd;
+    --dante:#2563eb; --dante-bg:#e8f0fe; --dante-bd:#b9ccf6;
+    --gold:#b07b1e; --gold-bg:#fbf0d9; --gold-bd:#ecd9a8;
+    --done:#059669;
+    --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+    --stage1:#2563eb; --stage2:#7c3aed; --stage3:#0e7c86;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body {
+    font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink);
+    background:#eef1f5; font-size:10.6pt; line-height:1.5; padding:24px;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .doc { max-width:880px; margin:0 auto; background:#fff; border-radius:16px; padding:36px 44px; box-shadow:0 2px 18px rgba(15,42,71,.08); }
+
+  /* ---------- cover ---------- */
+  .cover { background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,var(--holly) 130%); color:#fff; border-radius:16px; padding:40px 38px; margin:-4px 0 26px; }
+  .cover .eyebrow { text-transform:uppercase; letter-spacing:3px; font-size:9pt; opacity:.85; }
+  .cover h1 { margin:8px 0 6px; font-size:30pt; font-weight:800; letter-spacing:-.6px; line-height:1.1; }
+  .cover .sub { font-size:13pt; opacity:.95; font-weight:600; }
+  .cover .meta { margin-top:18px; font-size:9pt; opacity:.8; border-top:1px solid rgba(255,255,255,.25); padding-top:12px; }
+
+  h2.sec { font-size:18pt; color:var(--navy); margin:0 0 4px; letter-spacing:-.3px; }
+  .sec-wrap { margin-bottom:8px; }
+  .sec-kick { text-transform:uppercase; letter-spacing:2px; font-size:8pt; color:var(--gold); font-weight:800; }
+  .rule { height:3px; background:linear-gradient(90deg,var(--navy),transparent); border-radius:2px; margin:6px 0 18px; }
+  p.intro { color:var(--ink); font-size:10.6pt; }
+  .muted { color:var(--muted); }
+
+  /* ---------- TOC ---------- */
+  .toc { border:1px solid var(--line); border-radius:13px; padding:20px 26px; background:var(--bg); }
+  .toc h3 { margin:0 0 12px; font-size:9pt; text-transform:uppercase; letter-spacing:2px; color:var(--muted); }
+  .toc ol { margin:0; padding-left:0; list-style:none; counter-reset:toc; }
+  .toc li { counter-increment:toc; display:flex; align-items:baseline; gap:12px; padding:8px 0; border-bottom:1px dashed var(--line); }
+  .toc li:last-child { border-bottom:none; }
+  .toc li::before { content:counter(toc); flex:0 0 26px; height:26px; border-radius:7px; background:var(--navy); color:#fff; font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; }
+  .toc a { color:var(--navy); text-decoration:none; font-weight:600; font-size:11pt; }
+  .toc .tn { color:var(--muted); font-size:9pt; font-weight:400; }
+
+  /* ---------- generic callouts ---------- */
+  .callout { border-radius:11px; padding:13px 16px; margin:14px 0; }
+  .c-navy { background:var(--navy); color:#fff; }
+  .c-gold { background:var(--gold-bg); border-left:4px solid var(--gold); }
+  .c-holly { background:var(--holly-bg); border-left:4px solid var(--holly); }
+  .c-dante { background:var(--dante-bg); border-left:4px solid var(--dante); }
+  .callout .cl { font-size:8pt; text-transform:uppercase; letter-spacing:1.4px; font-weight:800; margin-bottom:4px; }
+  .c-gold .cl { color:var(--gold); } .c-holly .cl { color:var(--holly); } .c-dante .cl { color:var(--dante); }
+  .callout p { margin:0; font-size:9.6pt; }
+
+  /* ---------- naming (sec 2) ---------- */
+  .name-example { font-family:'SF Mono','Consolas',monospace; font-size:13pt; font-weight:700; background:#fff; border:2px dashed var(--gold-bd); border-radius:10px; padding:12px; text-align:center; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; color:var(--navy); }
+  .name-example .p { padding:2px 7px; border-radius:5px; }
+  .pe-date { background:#dbeafe; color:#1d4ed8; } .pe-desc { background:#ede9fe; color:#6d28d9; } .pe-init { background:var(--gold-bg); color:#7a5512; }
+  .rules2 { columns:2; column-gap:26px; margin:14px 0 0; padding:0; list-style:none; }
+  .rules2 li { font-size:9.4pt; margin:5px 0; padding-left:17px; position:relative; break-inside:avoid; }
+  .rules2 li::before { content:"▸"; color:var(--gold); position:absolute; left:0; font-weight:700; }
+  .rules2 li b { color:var(--navy); }
+
+  .flowwrap { display:grid; grid-template-columns:1fr 1.05fr; gap:18px; align-items:start; margin-top:16px; }
+  .tree { background:var(--navy); color:#e8eef5; border-radius:11px; padding:14px 15px; font-family:'SF Mono','Consolas',monospace; font-size:7.7pt; line-height:1.85; white-space:pre; }
+  .tree .fdr { font-weight:700; } .tree .root { color:#fff; }
+  .tree .s1 { color:#93c5fd; } .tree .s3 { color:#5eead4; } .tree .s4 { color:#6ee7b7; } .tree .sub { color:#fcd34d; } .tree .s2 { color:#c4b5fd; } .tree .cm { color:#7e93ab; }
+  .pipe { display:flex; flex-direction:column; gap:8px; }
+  .stage { border-radius:10px; padding:9px 13px; color:#fff; }
+  .stage .st { font-size:7.2pt; text-transform:uppercase; letter-spacing:1.3px; opacity:.9; }
+  .stage .nm { font-weight:800; font-size:10.5pt; } .stage .ds { font-size:8.4pt; opacity:.95; margin-top:1px; }
+  .stage.s1 { background:var(--stage1); } .stage.s2 { background:var(--stage2); } .stage.s3 { background:var(--stage3); } .stage.s4 { background:var(--done); }
+  .stage .att { margin-top:6px; background:rgba(255,255,255,.18); border-radius:6px; padding:4px 8px; font-size:8pt; }
+  .down { text-align:center; color:var(--gold); font-size:13pt; line-height:.4; }
+  .clio { text-align:center; border:2px dashed var(--navy2); border-radius:9px; padding:8px; font-size:8.6pt; color:var(--navy); background:#f8fafc; }
+
+  /* revision table */
+  .rev { border:1px solid var(--line); border-radius:11px; overflow:hidden; margin-top:16px; }
+  .rev .rh { background:var(--gold-bg); padding:7px 14px; font-weight:800; color:#7a5512; font-size:9pt; border-bottom:1px solid var(--gold-bd); }
+  .rev table { width:100%; border-collapse:collapse; }
+  .rev th,.rev td { text-align:left; padding:7px 13px; font-size:8.8pt; border-bottom:1px solid var(--line); vertical-align:top; }
+  .rev th { background:var(--bg); font-size:7.4pt; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); }
+  .rev td.fn { font-family:'SF Mono','Consolas',monospace; font-size:8.2pt; color:var(--navy); white-space:nowrap; }
+  .rev .who.d { color:var(--dante); font-weight:700; } .rev .who.l { color:var(--holly); font-weight:700; }
+  .rev tr:last-child td { border-bottom:none; }
+
+  /* ---------- scenario (sec 3) ---------- */
+  .legend { display:flex; gap:16px; justify-content:center; margin:4px 0 16px; flex-wrap:wrap; font-size:9pt; }
+  .legend span { display:flex; align-items:center; gap:6px; font-weight:600; }
+  .legend .sw { width:14px; height:14px; border-radius:4px; border:2px solid; }
+  .sw.h { background:var(--holly-bg); border-color:var(--holly); }
+  .sw.d { background:var(--dante-bg); border-color:var(--dante); }
+  .sw.o { background:var(--gold-bg); border-color:var(--gold); }
+  .compare { display:grid; grid-template-columns:1fr 56px 1fr; gap:0; align-items:stretch; }
+  .scn { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .scn .sh { padding:10px 14px; color:#fff; }
+  .scn.one .sh { background:linear-gradient(120deg,#64748b,#475569); }
+  .scn.two .sh { background:linear-gradient(120deg,var(--navy),var(--navy2)); }
+  .scn .sh .tag { font-size:7pt; text-transform:uppercase; letter-spacing:1.5px; opacity:.85; }
+  .scn .sh h3 { margin:2px 0 1px; font-size:12pt; }
+  .scn .sh .hub { font-size:8pt; opacity:.92; }
+  .scn .body { padding:11px 11px 13px; }
+  .stp { position:relative; padding:0 0 2px 26px; margin-bottom:8px; }
+  .stp:last-child { margin-bottom:0; }
+  .stp::before { content:attr(data-n); position:absolute; left:0; top:0; width:19px; height:19px; border-radius:50%; font-size:8pt; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; }
+  .stp::after { content:""; position:absolute; left:8.5px; top:19px; bottom:-8px; width:2px; background:var(--line); }
+  .stp:last-child::after { display:none; }
+  .stp .box { border-radius:8px; padding:6px 9px; border:1px solid var(--line); }
+  .stp .box .t { font-weight:700; font-size:8.8pt; } .stp .box .d { font-size:7.8pt; color:var(--muted); margin-top:1px; }
+  .holly .box { background:var(--holly-bg); border-color:var(--holly-bd); } .holly::before { background:var(--holly); }
+  .dante .box { background:var(--dante-bg); border-color:var(--dante-bd); } .dante::before { background:var(--dante); }
+  .handoff .box { background:var(--gold-bg); border-color:var(--gold-bd); } .handoff::before { background:var(--gold); content:"⇄"; font-size:9pt; }
+  .mid { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .mid .big-arrow { font-size:26pt; color:var(--gold); }
+  .mid .rail { writing-mode:vertical-rl; text-transform:uppercase; letter-spacing:2px; font-size:6.5pt; font-weight:800; color:var(--gold); margin-bottom:8px; }
+
+  /* ---------- mermaid (sec 4) ---------- */
+  .diagram { border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--bg); overflow-x:auto; margin-top:12px; }
+  .mermaid { display:flex; justify-content:center; }
+  .fallback { font-size:8.5pt; color:var(--muted); text-align:center; margin-top:8px; font-style:italic; }
+
+  /* ---------- step-by-step (sec 5/6) ---------- */
+  .when { font-size:9.6pt; }
+  .steplist { counter-reset:sx; margin:14px 0 0; padding:0; list-style:none; }
+  .steplist li { counter-increment:sx; position:relative; padding:10px 14px 10px 46px; border:1px solid var(--line); border-radius:10px; margin-bottom:9px; break-inside:avoid; }
+  .steplist li::before { content:counter(sx); position:absolute; left:11px; top:10px; width:24px; height:24px; border-radius:50%; color:#fff; font-weight:800; font-size:10pt; display:flex; align-items:center; justify-content:center; }
+  .steplist.holly li::before { background:var(--holly); }
+  .steplist.holly li { border-left:3px solid var(--holly-bd); }
+  .steplist li b { color:var(--navy); }
+  .steplist li .fn { font-family:'SF Mono','Consolas',monospace; font-size:8.8pt; background:var(--gold-bg); color:#7a5512; padding:1px 6px; border-radius:5px; }
+  .steplist li .fold { font-weight:700; color:var(--navy2); }
+
+  /* ---------- agentic (sec 7) ---------- */
+  .vphase { display:flex; gap:12px; margin:14px 0; }
+  .vcard { flex:1; border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .vcard .vn { font-size:7.5pt; text-transform:uppercase; letter-spacing:1.5px; font-weight:800; }
+  .vcard.v1 { border-top:4px solid var(--dante); } .vcard.v1 .vn { color:var(--dante); }
+  .vcard.v2 { border-top:4px solid var(--gold); } .vcard.v2 .vn { color:var(--gold); }
+  .vcard.v3 { border-top:4px solid var(--holly); } .vcard.v3 .vn { color:var(--holly); }
+  .vcard h4 { margin:4px 0 5px; font-size:10.5pt; } .vcard p { margin:0; font-size:8.8pt; color:var(--muted); }
+  .agent-split { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+  .arrow-line { font-family:'SF Mono',monospace; font-size:9.5pt; color:#6ee7b7; text-align:center; margin-top:10px; }
+
+  /* ---------- print ---------- */
+  @media print {
+    body { background:#fff; padding:0; font-size:10pt; }
+    .doc { box-shadow:none; border-radius:0; max-width:none; padding:0; }
+    @page { size:A4 portrait; margin:14mm 15mm; }
+    .cover { margin:0 0 18px; border-radius:0; }
+    section { break-before:page; }
+    section.first { break-before:auto; }
+    .sec-wrap, .toc, .rev, .compare, .vphase, .agent-split, .flowwrap, .diagram { break-inside:avoid; }
+    .steplist li { break-inside:avoid; }
+    a { color:var(--navy); text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ===== COVER ===== -->
+  <div class="cover">
+    <div class="eyebrow">Disclosure Workflow · Internal</div>
+    <h1>The Master Playbook</h1>
+    <div class="sub">File naming, folders, the Dante &amp; Holly workflow, and how to run it solo</div>
+    <div class="meta">One reference for the whole disclosure process — built to print, and to hand to anyone stepping in.</div>
+  </div>
+
+  <!-- ===== 1. INTRO + TOC ===== -->
+  <section class="first" id="intro">
+    <div class="sec-wrap"><div class="sec-kick">Section 1</div><h2 class="sec">Introduction &amp; purpose</h2></div>
+    <div class="rule"></div>
+    <p class="intro">This playbook is the single source of truth for how we produce and file disclosures. It exists so that <b>any</b> disclosure — drafted by Dante, finished by Holly, or done start-to-finish by one person — comes out the same way: correctly named, in the right folder, with a clean revision trail, and ending as a finalised record in Clio.</p>
+    <p class="intro">Read it once end-to-end. After that, jump to the section you need: the <b>ground rules</b> when you're naming or filing; the <b>workflow flowchart</b> when you're unsure who does what next; the <b>solo instructions</b> when you're running a disclosure on your own.</p>
+    <div class="callout c-gold"><div class="cl">The one principle behind all of it</div><p>The folder a document sits in tells you its <b>stage</b>; the initials in its filename tell you <b>who has touched it</b>. Keep those two things honest and the whole process stays legible — no version-number guessing, no lost drafts.</p></div>
+
+    <div class="toc">
+      <h3>What's inside</h3>
+      <ol>
+        <li><a href="#intro">Introduction &amp; purpose</a><br><span class="tn">Why this playbook exists and how to use it.</span></li>
+        <li><a href="#rules">Ground rules — file naming &amp; folder structure</a><br><span class="tn">The naming convention, the folders, and revision tracking.</span></li>
+        <li><a href="#scenario">Scenario transition guide</a><br><span class="tn">From Clio-centric today to Claude Teams as the drafting hub.</span></li>
+        <li><a href="#flow">The workflow flowchart — Dante &amp; Holly</a><br><span class="tn">Both lanes, the approval gates, and the handoffs.</span></li>
+        <li><a href="#solo-front">Holly solo — front end, from scratch</a><br><span class="tn">Starting a brand-new disclosure on your own.</span></li>
+        <li><a href="#solo-back">Holly solo — back end, finishing a started draft</a><br><span class="tn">Picking up a document Dante has already begun.</span></li>
+        <li><a href="#agentic">Agentic workflows — down the road</a><br><span class="tn">How automation fits once the process is proven.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 2. GROUND RULES ===== -->
+  <section id="rules">
+    <div class="sec-wrap"><div class="sec-kick">Section 2</div><h2 class="sec">Ground rules — naming &amp; folders</h2></div>
+    <div class="rule"></div>
+
+    <h3 style="color:var(--navy);margin:0 0 8px;font-size:12pt;">File naming convention</h3>
+    <div class="name-example">
+      <span class="p pe-date">20260601</span>
+      <span class="p pe-desc">initial disclosure statement</span>
+      <span class="p pe-init">(D L)</span>
+    </div>
+    <ul class="rules2">
+      <li><b>Date first</b> — YYYYMMDD (here, 1 June 2026). Keeps files in chronological order automatically.</li>
+      <li><b>Plain description</b> in lowercase — say what the document is, no codes.</li>
+      <li><b>Initials in parentheses</b> — <b>(D)</b> = Dante drafted; <b>(D&nbsp;L)</b> = Dante drafted, Lawyer reviewed.</li>
+      <li><b>Add initials, don't replace</b> — the trail grows left-to-right: <b>(D&nbsp;L&nbsp;D&nbsp;L)</b>.</li>
+      <li><b>One document, one name</b> — update the same file; never "final_final_v3".</li>
+      <li><b>No special characters</b> beyond spaces and the parentheses.</li>
+    </ul>
+
+    <h3 style="color:var(--navy);margin:20px 0 8px;font-size:12pt;">Folder structure &amp; how documents flow</h3>
+    <div class="flowwrap">
+      <div class="tree"><span class="root fdr">📁 SHARED</span>
+│
+├─ <span class="s1 fdr">📁 To Be Disclosed</span>   <span class="cm"># drafts in progress</span>
+│
+├─ <span class="s3 fdr">📁 Disclosures</span>       <span class="cm"># under review / ready</span>
+│   └─ <span class="sub fdr">📁 Attachments</span>   <span class="cm"># exhibits & annexes</span>
+│
+└─ <span class="s4 fdr">📁 Done</span>             <span class="cm"># finalised & filed</span>
+
+<span class="cm">──────────────────────</span>
+<span class="cm">Final copy exported →</span>
+<span class="s2 fdr">📦 CLIO</span> <span class="cm">(system of record)</span></div>
+      <div class="pipe">
+        <div class="stage s1"><div class="st">Stage 1 · Drafting</div><div class="nm">To Be Disclosed</div><div class="ds">Created &amp; named here while being written.</div></div>
+        <div class="down">▼</div>
+        <div class="stage s3"><div class="st">Stage 2 · Review</div><div class="nm">Disclosures</div><div class="ds">Moved here once ready for review.<div class="att">↳ <b>Attachments</b> holds every exhibit &amp; annex.</div></div></div>
+        <div class="down">▼</div>
+        <div class="stage s4"><div class="st">Stage 3 · Complete</div><div class="nm">Done</div><div class="ds">Approved &amp; finalised — nothing changes after.</div></div>
+        <div class="down">▼</div>
+        <div class="clio">Final copy exported to <b>Clio</b>, then filed / served.</div>
+      </div>
+    </div>
+
+    <div class="rev">
+      <div class="rh">Revision tracking — one document's life, start to finish</div>
+      <table>
+        <tr><th>Filename</th><th>Who &amp; what</th><th>Note added</th></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D)</td><td><span class="who d">Dante</span> — first draft</td><td>“First pass from template — flagged 2 gaps for Holly.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L)</td><td><span class="who l">Holly</span> — reviewed</td><td>“Tightened para 3; confirm exhibit B date.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L D)</td><td><span class="who d">Dante</span> — revised</td><td>“Para 3 updated; exhibit B date confirmed 28/05.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L D L)</td><td><span class="who l">Holly</span> — approved ✓</td><td>“Approved. Move to Done &amp; export to Clio.”</td></tr>
+      </table>
+    </div>
+    <div class="callout c-holly"><div class="cl">How notes get added</div><p>Keep a one-line note with each change — a comment in the document or a line in a running log. The <b>initials</b> say who last touched it; the <b>note</b> says what changed. Together they are your complete revision history.</p></div>
+  </section>
+
+  <!-- ===== 3. SCENARIO ===== -->
+  <section id="scenario">
+    <div class="sec-wrap"><div class="sec-kick">Section 3</div><h2 class="sec">Scenario transition guide</h2></div>
+    <div class="rule"></div>
+    <p class="muted" style="margin-top:0;font-size:9.6pt;">How the day-to-day evolves: drafting moves out of Clio and into Claude Teams, while Clio becomes the final system of record rather than the workshop.</p>
+    <div class="legend">
+      <span><span class="sw h"></span> Holly's tasks</span>
+      <span><span class="sw d"></span> Dante / system support</span>
+      <span><span class="sw o"></span> Handoff &amp; system moves</span>
+    </div>
+    <div class="compare">
+      <div class="scn one">
+        <div class="sh"><div class="tag">Scenario One · Today</div><h3>Clio-Centric</h3><div class="hub">Hub: <b>Clio</b> · Claude: limited</div></div>
+        <div class="body">
+          <div class="stp holly" data-n="1"><div class="box"><div class="t">Holly opens the matter in Clio</div><div class="d">Everything starts and lives in Clio.</div></div></div>
+          <div class="stp holly" data-n="2"><div class="box"><div class="t">Holly drafts directly in Clio / Word</div><div class="d">Manual, document by document.</div></div></div>
+          <div class="stp dante" data-n="3"><div class="box"><div class="t">Dante supports with light Claude use</div><div class="d">Occasional research or first pass.</div></div></div>
+          <div class="stp handoff" data-n="4"><div class="box"><div class="t">Drafts emailed back and forth</div><div class="d">Versions easy to lose.</div></div></div>
+          <div class="stp holly" data-n="5"><div class="box"><div class="t">Holly assembles disclosure in Clio</div><div class="d">Review &amp; packaging in Clio.</div></div></div>
+          <div class="stp handoff" data-n="6"><div class="box"><div class="t">Filed / served from Clio</div><div class="d">Clio is workspace and record.</div></div></div>
+        </div>
+      </div>
+      <div class="mid"><div class="rail">Over time</div><div class="big-arrow">➜</div></div>
+      <div class="scn two">
+        <div class="sh"><div class="tag">Scenario Two · Goal</div><h3>Claude Teams–Centric</h3><div class="hub">Hub: <b>Claude Teams</b> · Clio: destination</div></div>
+        <div class="body">
+          <div class="stp dante" data-n="1"><div class="box"><div class="t">Matter of record opened in Clio</div><div class="d">Intake unchanged.</div></div></div>
+          <div class="stp dante" data-n="2"><div class="box"><div class="t">Dante builds first drafts in Claude Teams</div><div class="d">Using the playbook + naming.</div></div></div>
+          <div class="stp holly" data-n="3"><div class="box"><div class="t">Holly drafts &amp; refines in Claude Teams</div><div class="d">Her primary drafting hub.</div></div></div>
+          <div class="stp handoff" data-n="4"><div class="box"><div class="t">Revisions tracked by naming + folders</div><div class="d">Initials &amp; folder moves.</div></div></div>
+          <div class="stp holly" data-n="5"><div class="box"><div class="t">Holly approves the final version</div><div class="d">One clear sign-off gate.</div></div></div>
+          <div class="stp handoff" data-n="6"><div class="box"><div class="t">Approved final exported to Clio</div><div class="d">Clio = system of record.</div></div></div>
+          <div class="stp handoff" data-n="7"><div class="box"><div class="t">Filed / served from Clio</div><div class="d">Build in Claude, record in Clio.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout c-navy"><p><b>The shift in one line:</b> Clio stops being where work <i>happens</i> and becomes where finished work <i>lands</i>. Drafting and collaboration move into Claude Teams — faster to produce, easier to track — and a clean record still lives in Clio.</p></div>
+  </section>
+
+  <!-- ===== 4. FLOWCHART ===== -->
+  <section id="flow">
+    <div class="sec-wrap"><div class="sec-kick">Section 4</div><h2 class="sec">The workflow flowchart — Dante &amp; Holly</h2></div>
+    <div class="rule"></div>
+    <p class="muted" style="margin-top:0;font-size:9.6pt;">Two swimlanes, start to finish. Diamonds are decision points; gold hexagons are handoffs where one person must finish before the other continues.</p>
+    <div class="legend">
+      <span><span class="sw d"></span> Dante (paralegal)</span>
+      <span><span class="sw h"></span> Holly (lawyer)</span>
+      <span><span class="sw o"></span> Handoff point</span>
+    </div>
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TB
+
+subgraph DANTE["🧑‍💼 DANTE · Paralegal"]
+  direction TB
+  D1(["Start: new disclosure assigned"])
+  D2["Create document &amp; name it<br/><b>20260601 initial disclosure statement (D)</b>"]
+  D3[/"Save to 📁 To Be Disclosed"/]
+  D4["Draft in Claude Teams<br/>using the playbook"]
+  D5["Self-review against checklist"]
+  D6{"Draft ready<br/>for Holly?"}
+  D7["Revise per Holly's notes<br/>append → <b>(D L D)</b>"]
+end
+
+HO1{{"🤝 HANDOFF<br/>Ready for review"}}
+HO2{{"🤝 HANDOFF BACK<br/>Revisions requested"}}
+
+subgraph HOLLY["⚖️ HOLLY · Lawyer"]
+  direction TB
+  H1["Review draft + read notes"]
+  H2{"Approve?"}
+  H3["Add revision notes<br/>append → <b>(D L)</b>"]
+  H4["Approve &amp; finalise"]
+  H5[/"Move → 📁 Disclosures<br/>exhibits → 📁 Attachments"/]
+  H6[/"Move final → 📁 Done"/]
+  H7["Export to Clio"]
+  H8(["✅ Filed / served"])
+end
+
+D1 --> D2 --> D3 --> D4 --> D5 --> D6
+D6 -- "No" --> D4
+D6 -- "Yes" --> HO1
+HO1 --> H1 --> H2
+H2 -- "Needs changes" --> H3 --> HO2
+HO2 --> D7 --> D4
+H2 -- "Approved" --> H4 --> H5 --> H6 --> H7 --> H8
+
+classDef dante fill:#e8f0fe,stroke:#2563eb,stroke-width:1.5px,color:#0f2a47;
+classDef holly fill:#e1f3f0,stroke:#0e7c86,stroke-width:1.5px,color:#0f2a47;
+classDef handoff fill:#fbf0d9,stroke:#b07b1e,stroke-width:2px,color:#5a3d00;
+classDef gate fill:#ffffff,stroke:#0f2a47,stroke-width:1.5px,color:#0f2a47;
+classDef startend fill:#0f2a47,stroke:#0f2a47,color:#ffffff;
+
+class D2,D3,D4,D5,D7 dante;
+class H1,H3,H4,H5,H6,H7 holly;
+class HO1,HO2 handoff;
+class D6,H2 gate;
+class D1,H8 startend;
+
+style DANTE fill:#f3f7fd,stroke:#2563eb,stroke-width:1.5px,color:#1d4ed8;
+style HOLLY fill:#edfaf8,stroke:#0e7c86,stroke-width:1.5px,color:#0a5b63;
+      </pre>
+    </div>
+    <div class="fallback">If the diagram is blank, open this file in an up-to-date browser with internet access (the Mermaid renderer loads from a CDN).</div>
+  </section>
+
+  <!-- ===== 5. SOLO FRONT END ===== -->
+  <section id="solo-front">
+    <div class="sec-wrap"><div class="sec-kick">Section 5</div><h2 class="sec">Holly solo — front end, from scratch</h2></div>
+    <div class="rule"></div>
+    <div class="callout c-holly"><div class="cl">When to use this</div><p class="when">You're starting a brand-new disclosure yourself — no draft from Dante. You own the whole document, front to back.</p></div>
+    <ol class="steplist holly">
+      <li><b>Open Claude Teams</b> and start a new disclosure draft from the playbook / template.</li>
+      <li><b>Name the file right away</b> using the convention, with your initial: <span class="fn">20260601 initial disclosure statement (L)</span></li>
+      <li><b>Save it into</b> <span class="fold">📁 Shared / To Be Disclosed.</span> This is its home while you write.</li>
+      <li><b>Draft in Claude Teams</b>, working from the template and the matter facts. Let Claude do the heavy lifting on structure and first language.</li>
+      <li><b>Collect exhibits as you go</b> — keep them together so they're ready to file.</li>
+      <li><b>Self-review</b> against the disclosure checklist. Fix anything before it moves.</li>
+      <li><b>Move the draft to</b> <span class="fold">📁 Disclosures</span>, and put every exhibit into <span class="fold">📁 Disclosures / Attachments.</span></li>
+      <li><b>Do your approval pass.</b> You're both author and approver here — keep your initial <span class="fn">(L)</span> as the sign-off on the trail.</li>
+      <li><b>Move the finalised document to</b> <span class="fold">📁 Done.</span> Nothing changes after this.</li>
+      <li><b>Export the final copy to Clio</b> (system of record), then file / serve.</li>
+    </ol>
+  </section>
+
+  <!-- ===== 6. SOLO BACK END ===== -->
+  <section id="solo-back">
+    <div class="sec-wrap"><div class="sec-kick">Section 6</div><h2 class="sec">Holly solo — back end, finishing a started draft</h2></div>
+    <div class="rule"></div>
+    <div class="callout c-dante"><div class="cl">When to use this</div><p class="when">Dante has already drafted the document and handed it over. You're picking it up to review, finish, and file.</p></div>
+    <ol class="steplist holly">
+      <li><b>Find Dante's draft</b> in <span class="fold">📁 Shared / To Be Disclosed</span> — its name ends with <span class="fn">(D)</span>.</li>
+      <li><b>Open it in Claude Teams</b> and <b>read Dante's notes first</b> — he'll have flagged gaps or questions for you.</li>
+      <li><b>Review the draft</b> against the matter and the checklist.</li>
+      <li><b>Make your edits in the same file</b>, then <b>append your initial</b>: <span class="fn">(D)</span> → <span class="fn">(D L)</span></li>
+      <li><b>Add a short revision note</b> for anything significant you changed or need confirmed.</li>
+      <li><b>If you need Dante to action something</b>, that's a handoff back — leave a note and let him pick it up (he'll append → <span class="fn">(D L D)</span>). Otherwise, carry on.</li>
+      <li><b>Move it to</b> <span class="fold">📁 Disclosures</span>; exhibits to <span class="fold">📁 Disclosures / Attachments.</span></li>
+      <li><b>Final approval pass</b> — the trail ends on your initial, e.g. <span class="fn">(D L)</span>.</li>
+      <li><b>Move to</b> <span class="fold">📁 Done</span>, then <b>export to Clio</b> and file / serve.</li>
+    </ol>
+  </section>
+
+  <!-- ===== 7. AGENTIC ===== -->
+  <section id="agentic">
+    <div class="sec-wrap"><div class="sec-kick">Section 7</div><h2 class="sec">Agentic workflows — down the road</h2></div>
+    <div class="rule"></div>
+    <div class="callout c-gold"><div class="cl">The one rule</div><p>An agent doesn't <i>invent</i> the process — it <i>executes</i> the one you've already proven works. It's the automation version of this playbook, and it only arrives <b>after</b> the manual process is stable (roughly 2–3 disclosures in).</p></div>
+
+    <div class="vphase">
+      <div class="vcard v1"><div class="vn">Now</div><h4>Manual</h4><p>Dante drafts, Holly approves — by hand. The job here is to <b>prove and document</b> the process until it stops changing.</p></div>
+      <div class="vcard v2"><div class="vn">Soon</div><h4>Stable playbook</h4><p>After a few disclosures, this document is solid and the steps don't shift between cases. That stability is the green light.</p></div>
+      <div class="vcard v3"><div class="vn">Later</div><h4>Agent-assisted</h4><p>An agent runs the routine spine; Holly keeps the judgement and the final approval.</p></div>
+    </div>
+
+    <h3 style="color:var(--navy);margin:16px 0 8px;font-size:11.5pt;">What the agent will and won't do</h3>
+    <div class="agent-split">
+      <div class="callout c-dante" style="margin:0;"><div class="cl">The agent handles (routine)</div><p>Drafts the first version from the template · applies the naming convention automatically · files it into the correct folder · gathers exhibits into Attachments · flags it for Holly with notes. Essentially, everything in Dante's lane that's the same every time.</p></div>
+      <div class="callout c-holly" style="margin:0;"><div class="cl">Holly keeps (judgement)</div><p>The review. The approval gate. Any case-specific call. Nothing is moved to Done, exported to Clio, or filed without her sign-off — the human is never removed from the disclosure handoff.</p></div>
+    </div>
+
+    <div class="callout c-navy">
+      <div class="cl" style="color:#6ee7b7;">The direction is one-way</div>
+      <p>You move from a proven manual process, to a written playbook, to an agent — never the reverse. Skipping ahead just automates mistakes onto a process you haven't yet trusted.</p>
+      <div class="arrow-line">Manual proof ──► Playbook ──► Agent</div>
+    </div>
+    <p class="muted" style="font-size:9pt;">The agent lives alongside the team's other proven tools and executes this exact flowchart — the same lanes, the same naming convention, the same folder moves, the same approval gate. When it arrives, nothing about <i>what</i> good looks like changes; only <i>who</i> does the routine parts.</p>
+  </section>
+
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Helvetica Neue, Segoe UI, Arial, sans-serif',
+      fontSize: '13px',
+      lineColor: '#5a6675',
+      primaryColor: '#f6f8fb',
+      primaryBorderColor: '#1e4d7b',
+      primaryTextColor: '#0f2a47'
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', nodeSpacing: 38, rankSpacing: 42 }
+  });
+</script>
+</body>
+</html>

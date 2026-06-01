@@ -16,8 +16,11 @@ that any disclosure run draws from.
 ```
 PERSONAL
 ├── Disclosure Strategy        (Chat Project)   → personal/disclosure-strategy/
+│     └── debriefs/            post-case "feelings & learning" → personal/disclosure-strategy/debriefs/
 ├── Personal Explorations      (Chat Project)   → personal/personal-explorations/
-└── Workflows & Architecture   (Cowork Project)  → personal/workflows-and-architecture/
+└── Workflows & Architecture   (Cowork Project) → personal/workflows-and-architecture/
+      ├── playbooks/           the reusable library (incl. debrief)
+      └── build-and-debug/     messy code sandbox → promoted into playbooks/
 
 TEAMS
 ├── Running Disclosures        (Chat Project)   → teams/running-disclosures/        (master tracker)
@@ -35,12 +38,30 @@ TEAMS
 ## How the pieces connect
 
 - **Personal → Workflows & Architecture** holds the *reusable* playbooks
-  (pre-run review, audit, debugging, run). It is the library.
+  (pre-run review, run, audit, debugging, debrief) — the library. Its
+  `build-and-debug/` sandbox is where messy code is written, then **promoted**
+  into the clean playbooks.
 - **Teams → Running Disclosures** is the master tracker: one index, one status
   view across every active and planned case.
 - **Teams → Disclosure [Case Name]** is a per-case workspace. Copy
   `teams/disclosure-case-template/` for each new case; its playbooks point back
   to the reusable library in Personal.
+
+### The learning loop
+
+This is a **cycle**, not a one-way pipeline:
+
+```
+library  ──draws into──►  case (pre-run → execution → audit, in Teams)
+   ▲                                      │
+   │                                      ▼
+   └──── lessons ◄──── debrief (back in Personal: feelings & learning)
+```
+
+The **audit stays in Teams** (*did it work?*). The **debrief comes home to
+Personal** (*what did I learn, how did it feel?*). Each debrief's lessons are
+folded back into the library — that return edit is what makes the next case
+start better.
 
 ## Starting a new disclosure
 
@@ -48,5 +69,8 @@ TEAMS
 2. Add the case to `teams/running-disclosures/active-disclosures-index.md`.
 3. Work the playbooks in order: **pre-run review → execution → audit**, with
    **one-off debugging** as needed.
+4. After the audit, **debrief back in Personal**: add
+   `personal/disclosure-strategy/debriefs/debrief-<case>.md`, then fold its
+   lessons into `personal/workflows-and-architecture/playbooks/`.
 
 See each directory's `README.md` for detail.

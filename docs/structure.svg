@@ -1,49 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="900" viewBox="0 0 1180 900" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1060" viewBox="0 0 1180 1060" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
   <defs>
     <style>
       .title    { font-size: 30px; font-weight: 700; fill: #1a1a2e; }
-      .subtitle  { font-size: 14px; fill: #6b7280; }
+      .subtitle { font-size: 14px; fill: #6b7280; }
       .zone-label{ font-size: 16px; font-weight: 700; letter-spacing: 2px; }
-      .proj      { font-size: 16px; font-weight: 700; fill: #ffffff; }
-      .ptype     { font-size: 11px; font-weight: 600; fill: #ffffff; opacity: 0.85; }
-      .leaf      { font-size: 13px; fill: #374151; }
-      .leafmuted { font-size: 12px; fill: #6b7280; font-style: italic; }
-      .legtxt    { font-size: 12px; fill: #374151; }
+      .proj     { font-size: 16px; font-weight: 700; fill: #ffffff; }
+      .ptype    { font-size: 11px; font-weight: 600; fill: #ffffff; opacity: 0.85; }
+      .leaf     { font-size: 13px; fill: #374151; }
+      .leafhi   { font-size: 13px; font-weight: 700; fill: #4f46e5; }
+      .leafsub  { font-size: 13px; font-weight: 700; fill: #0e9488; }
+      .leafmuted{ font-size: 12px; fill: #6b7280; font-style: italic; }
+      .legtxt   { font-size: 12px; fill: #374151; }
+      .pill     { font-size: 13px; fill: #1f2937; }
+      .looptxt  { font-size: 14px; fill: #b45309; font-weight: 700; }
+      .loopcap  { font-size: 13px; fill: #6b7280; font-style: italic; }
+      .tag      { font-size: 10px; font-weight: 700; fill: #ffffff; }
     </style>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+    <marker id="arrLoop" markerWidth="11" markerHeight="11" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#d97706"/>
+    </marker>
   </defs>
 
-  <rect width="1180" height="900" fill="#f7f8fb"/>
+  <rect width="1180" height="1060" fill="#f7f8fb"/>
 
   <!-- Header -->
   <text x="40" y="50" class="title">Workflow Outline</text>
-  <text x="40" y="74" class="subtitle">Disclosure work organized across Personal &amp; Teams — Chat Projects (think / track / review) and Cowork Projects (code / execute)</text>
+  <text x="40" y="74" class="subtitle">A learning loop: the library feeds each case; each case's debrief feeds the library back.</text>
 
   <!-- Legend -->
-  <g transform="translate(760,28)">
+  <g transform="translate(720,24)">
     <rect x="0" y="0" width="14" height="14" rx="3" fill="#4f46e5"/>
     <text x="22" y="11" class="legtxt">Chat Project</text>
-    <rect x="130" y="0" width="14" height="14" rx="3" fill="#0e9488"/>
-    <text x="152" y="11" class="legtxt">Cowork Project</text>
-    <rect x="0" y="24" width="14" height="14" rx="3" fill="#b45309"/>
-    <text x="22" y="35" class="legtxt">Master Tracker</text>
-    <rect x="130" y="24" width="14" height="14" rx="3" fill="#ffffff" stroke="#9ca3af" stroke-dasharray="3 2"/>
-    <text x="152" y="35" class="legtxt">Copy per case (template)</text>
+    <rect x="118" y="0" width="14" height="14" rx="3" fill="#0e9488"/>
+    <text x="140" y="11" class="legtxt">Cowork Project</text>
+    <rect x="262" y="0" width="14" height="14" rx="3" fill="#b45309"/>
+    <text x="284" y="11" class="legtxt">Master Tracker</text>
+    <rect x="0" y="22" width="14" height="14" rx="3" fill="#ffffff" stroke="#9ca3af" stroke-dasharray="3 2"/>
+    <text x="22" y="33" class="legtxt">Copy per case (template)</text>
+    <circle cx="200" cy="29" r="8" fill="#4f46e5"/><text x="200" y="32" text-anchor="middle" class="tag">P</text>
+    <text x="214" y="33" class="legtxt">Personal</text>
+    <circle cx="292" cy="29" r="8" fill="#b91c1c"/><text x="292" y="32" text-anchor="middle" class="tag">T</text>
+    <text x="306" y="33" class="legtxt">Teams</text>
   </g>
 
   <!-- ============ PERSONAL ZONE ============ -->
-  <rect x="30" y="100" width="1120" height="350" rx="14" fill="#eef0fb" stroke="#c7cdf5"/>
-  <text x="52" y="130" class="zone-label" fill="#4f46e5">PERSONAL</text>
+  <rect x="30" y="98" width="1120" height="372" rx="14" fill="#eef0fb" stroke="#c7cdf5"/>
+  <text x="52" y="128" class="zone-label" fill="#4f46e5">PERSONAL</text>
 
   <!-- Disclosure Strategy -->
   <g transform="translate(52,150)">
     <rect width="340" height="44" rx="9" fill="#4f46e5"/>
     <text x="16" y="22" class="proj">Disclosure Strategy</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT</text>
-    <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
-    <text x="30" y="80" class="leaf">• Vision for Disclosure 1</text>
-    <text x="30" y="104" class="leaf">• Vision for Disclosure 2</text>
-    <text x="30" y="128" class="leaf">• Notes on approach</text>
-    <text x="30" y="156" class="leafmuted">the "why" &amp; "what", pre-case</text>
+    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
+    <text x="30" y="82" class="leaf">• Vision for Disclosure 1</text>
+    <text x="30" y="106" class="leaf">• Vision for Disclosure 2</text>
+    <text x="30" y="130" class="leaf">• Notes on approach</text>
+    <line x1="30" y1="146" x2="296" y2="146" stroke="#e5e7eb"/>
+    <text x="30" y="170" class="leafhi">• Debrief (per case)</text>
+    <text x="44" y="190" class="leaf">feelings &amp; learning — comes</text>
+    <text x="44" y="208" class="leaf">home after the Teams audit</text>
+    <text x="30" y="236" class="leafmuted">the reflective home for disclosures</text>
   </g>
 
   <!-- Personal Explorations -->
@@ -51,11 +71,11 @@
     <rect width="340" height="44" rx="9" fill="#4f46e5"/>
     <text x="16" y="22" class="proj">Personal Explorations</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT</text>
-    <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
-    <text x="30" y="80" class="leaf">• Quantum Theory</text>
-    <text x="30" y="104" class="leaf">• Books &amp; Reading</text>
-    <text x="30" y="128" class="leaf">• Life &amp; Reflection</text>
-    <text x="30" y="156" class="leafmuted">open-ended, off to the side</text>
+    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#d7dbf6"/>
+    <text x="30" y="82" class="leaf">• Quantum Theory</text>
+    <text x="30" y="106" class="leaf">• Books &amp; Reading</text>
+    <text x="30" y="130" class="leaf">• Life &amp; Reflection</text>
+    <text x="30" y="236" class="leafmuted">open-ended, off to the side</text>
   </g>
 
   <!-- Workflows & Architecture -->
@@ -63,81 +83,105 @@
     <rect width="340" height="44" rx="9" fill="#0e9488"/>
     <text x="16" y="22" class="proj">Workflows &amp; Architecture</text>
     <text x="16" y="37" class="ptype">COWORK PROJECT — the library</text>
-    <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#bfe7e2"/>
-    <text x="30" y="80" class="leaf">Reusable playbook templates:</text>
-    <text x="30" y="104" class="leaf">• pre-run review&#160;&#160;• run</text>
-    <text x="30" y="128" class="leaf">• audit&#160;&#160;• debugging</text>
-    <text x="30" y="156" class="leafmuted">canonical source for every case</text>
+    <rect x="14" y="56" width="312" height="194" rx="8" fill="#ffffff" stroke="#bfe7e2"/>
+    <text x="30" y="82" class="leafsub">playbooks/ — reusable library</text>
+    <text x="30" y="104" class="leaf">• pre-run · run · audit</text>
+    <text x="30" y="124" class="leaf">• debrief · debugging</text>
+    <line x1="30" y1="140" x2="296" y2="140" stroke="#e5e7eb"/>
+    <text x="30" y="166" class="leafsub">build-and-debug/ — sandbox</text>
+    <text x="30" y="188" class="leaf">• messy code lives here…</text>
+    <text x="30" y="208" class="leaf">• …then promoted ↑ to playbooks</text>
+    <text x="30" y="236" class="leafmuted">canonical source for every case</text>
   </g>
 
   <!-- ============ TEAMS ZONE ============ -->
-  <rect x="30" y="475" width="1120" height="380" rx="14" fill="#fef3f2" stroke="#f6c9c4"/>
-  <text x="52" y="505" class="zone-label" fill="#b91c1c">TEAMS</text>
+  <rect x="30" y="492" width="1120" height="300" rx="14" fill="#fef3f2" stroke="#f6c9c4"/>
+  <text x="52" y="522" class="zone-label" fill="#b91c1c">TEAMS</text>
 
   <!-- Running Disclosures (master tracker) -->
-  <g transform="translate(52,525)">
+  <g transform="translate(52,542)">
     <rect width="340" height="44" rx="9" fill="#b45309"/>
     <text x="16" y="22" class="proj">Running Disclosures</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT — MASTER TRACKER</text>
     <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#f0d9b5"/>
-    <text x="30" y="80" class="leaf">• Active disclosures index</text>
-    <text x="30" y="104" class="leaf">• Status: done / in progress /</text>
+    <text x="30" y="82" class="leaf">• Active disclosures index</text>
+    <text x="30" y="106" class="leaf">• Status: done / in progress /</text>
     <text x="46" y="124" class="leaf">planned</text>
     <text x="30" y="156" class="leafmuted">one view across all cases</text>
   </g>
 
   <!-- Disclosure [Case Name] - Chat -->
-  <g transform="translate(420,525)">
+  <g transform="translate(420,542)">
     <rect width="340" height="44" rx="9" fill="#4f46e5" stroke="#1e1b4b" stroke-dasharray="4 3"/>
     <text x="16" y="22" class="proj">Disclosure [Case Name]</text>
     <text x="16" y="37" class="ptype">CHAT PROJECT</text>
     <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#d7dbf6" stroke-dasharray="4 3"/>
-    <text x="30" y="80" class="leaf">• Pre-run review</text>
-    <text x="30" y="104" class="leaf">• Audit</text>
-    <text x="30" y="128" class="leaf">• One-off debugging</text>
-    <text x="30" y="156" class="leafmuted">copy this per case</text>
+    <text x="30" y="82" class="leaf">• Pre-run review</text>
+    <text x="30" y="106" class="leaf">• Audit  (case ends here)</text>
+    <text x="30" y="130" class="leaf">• One-off debugging</text>
+    <text x="30" y="156" class="leafmuted">copy per case · debrief → Personal</text>
   </g>
 
   <!-- Disclosure [Case Name] - Cowork -->
-  <g transform="translate(788,525)">
+  <g transform="translate(788,542)">
     <rect width="340" height="44" rx="9" fill="#0e9488" stroke="#042f2e" stroke-dasharray="4 3"/>
     <text x="16" y="22" class="proj">Disclosure [Case Name]</text>
     <text x="16" y="37" class="ptype">COWORK PROJECT</text>
     <rect x="14" y="56" width="312" height="118" rx="8" fill="#ffffff" stroke="#bfe7e2" stroke-dasharray="4 3"/>
-    <text x="30" y="80" class="leaf">execution/</text>
-    <text x="30" y="104" class="leaf">• The actual code that runs</text>
+    <text x="30" y="82" class="leaf">execution/</text>
+    <text x="30" y="106" class="leaf">• The actual code that runs</text>
     <text x="46" y="124" class="leaf">the disclosure</text>
-    <text x="30" y="156" class="leafmuted">copy this per case</text>
+    <text x="30" y="156" class="leafmuted">copy per case</text>
   </g>
 
-  <!-- Flow arrows row -->
-  <g transform="translate(52,725)">
-    <rect width="1076" height="105" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="20" y="30" class="leaf" font-weight="700" fill="#111827">Per-case flow</text>
+  <!-- Cross-zone loop arrows -->
+  <!-- DOWN: library draws into cases -->
+  <path d="M958,400 L958,466 L610,466 L610,540" fill="none" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="612" y="472" width="150" height="20" rx="10" fill="#f7f8fb"/>
+  <text x="618" y="487" class="legtxt">library → draws into case</text>
 
-    <!-- pipeline -->
-    <g transform="translate(40,55)">
-      <rect x="0"   y="0" width="150" height="34" rx="17" fill="#eef0fb" stroke="#4f46e5"/>
-      <text x="75" y="22" text-anchor="middle" class="leaf">1 · Pre-run review</text>
-      <line x1="158" y1="17" x2="198" y2="17" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- ============ LEARNING LOOP PANEL ============ -->
+  <rect x="30" y="812" width="1120" height="218" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="52" y="842" class="looptxt">THE LEARNING LOOP</text>
+  <text x="280" y="842" class="loopcap">audit (Teams) → debrief (Personal) → lessons improve the library → next case starts better</text>
 
-      <rect x="206" y="0" width="150" height="34" rx="17" fill="#e6f4f2" stroke="#0e9488"/>
-      <text x="281" y="22" text-anchor="middle" class="leaf">2 · Execution</text>
-      <line x1="364" y1="17" x2="404" y2="17" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- pills -->
+  <g transform="translate(0,866)">
+    <!-- 1 library (Personal / cowork) -->
+    <rect x="52" y="0" width="176" height="40" rx="20" fill="#e6f4f2" stroke="#0e9488"/>
+    <circle cx="74" cy="20" r="9" fill="#4f46e5"/><text x="74" y="24" text-anchor="middle" class="tag">P</text>
+    <text x="90" y="25" class="pill">W &amp; A library</text>
+    <line x1="228" y1="20" x2="266" y2="20" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
-      <rect x="412" y="0" width="150" height="34" rx="17" fill="#eef0fb" stroke="#4f46e5"/>
-      <text x="487" y="22" text-anchor="middle" class="leaf">3 · Audit</text>
+    <!-- 2 pre-run (Teams / chat) -->
+    <rect x="274" y="0" width="150" height="40" rx="20" fill="#eef0fb" stroke="#4f46e5"/>
+    <circle cx="296" cy="20" r="9" fill="#b91c1c"/><text x="296" y="24" text-anchor="middle" class="tag">T</text>
+    <text x="312" y="25" class="pill">Pre-run review</text>
+    <line x1="424" y1="20" x2="462" y2="20" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
-      <rect x="640" y="0" width="200" height="34" rx="17" fill="#fff7ed" stroke="#b45309"/>
-      <text x="740" y="22" text-anchor="middle" class="leaf">debugging — as needed</text>
+    <!-- 3 execution (Teams / cowork) -->
+    <rect x="470" y="0" width="140" height="40" rx="20" fill="#e6f4f2" stroke="#0e9488"/>
+    <circle cx="492" cy="20" r="9" fill="#b91c1c"/><text x="492" y="24" text-anchor="middle" class="tag">T</text>
+    <text x="508" y="25" class="pill">Execution</text>
+    <line x1="610" y1="20" x2="648" y2="20" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
-      <text x="890" y="22" class="leafmuted">drawn from the Personal library ↑</text>
-    </g>
+    <!-- 4 audit (Teams / chat) -->
+    <rect x="656" y="0" width="120" height="40" rx="20" fill="#eef0fb" stroke="#4f46e5"/>
+    <circle cx="678" cy="20" r="9" fill="#b91c1c"/><text x="678" y="24" text-anchor="middle" class="tag">T</text>
+    <text x="694" y="25" class="pill">Audit</text>
+    <line x1="776" y1="20" x2="814" y2="20" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+
+    <!-- 5 debrief (Personal / chat) -->
+    <rect x="822" y="0" width="262" height="40" rx="20" fill="#eef0fb" stroke="#4f46e5"/>
+    <circle cx="844" cy="20" r="9" fill="#4f46e5"/><text x="844" y="24" text-anchor="middle" class="tag">P</text>
+    <text x="860" y="25" class="pill">Debrief — feelings &amp; learning</text>
   </g>
 
-  <defs>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af"/>
-    </marker>
-  </defs>
+  <!-- return arc: debrief -> library (the feedback that makes it a loop) -->
+  <path d="M953,906 C953,978 145,978 145,910" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arrLoop)"/>
+  <rect x="430" y="965" width="320" height="22" rx="11" fill="#ffffff"/>
+  <text x="590" y="981" text-anchor="middle" class="looptxt">lessons fold back into the library</text>
+
+  <!-- debugging side note -->
+  <text x="52" y="1018" class="loopcap">…with one-off debugging as needed at any stage.</text>
 </svg>

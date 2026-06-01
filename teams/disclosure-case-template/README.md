@@ -23,7 +23,14 @@ Run the stages in order, drawing each from the reusable library in
 
 1. **Pre-run review** → go / no-go
 2. **Execution** (in `execution/`)
-3. **Audit**
+3. **Audit** → *did it work?* — this is where the case ends, here in Teams.
+4. **Debrief** → *what did I learn, how did it feel?* — this happens **back in
+   Personal**, not here. Add `debrief-<case>.md` to
+   [`personal/disclosure-strategy/debriefs/`](../../personal/disclosure-strategy/debriefs/),
+   and fold its lessons into the playbook library.
 
 …with **one-off debugging** as needed along the way. Register the case in the
 [master tracker](../running-disclosures/active-disclosures-index.md).
+
+> The audit stays in Teams; the debrief comes home to Personal. That handoff is
+> what turns a finished case into a better next one.

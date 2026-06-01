@@ -14,20 +14,26 @@ and a **Cowork Project** (the actual execution).
 
 ## Cowork Project — execution
 
-- [execution/](./execution/) — the code that actually runs the disclosure
+- [execution/](./execution/) — **the Teams code** that actually runs the
+  disclosure for this case. It *draws from* the Personal library
+  (`personal/workflows-and-architecture/playbooks/`); it doesn't hold the only
+  copy of anything reusable.
 
 ## Process
 
-Run the stages in order, drawing each from the reusable library in
+Steps are numbered to match the global [order of operations](../../README.md#order-of-operations--the-7-steps)
+(steps 1–2 — building the reusable code — happen in Personal, before this).
+Each stage draws from the reusable library in
 [`personal/workflows-and-architecture/playbooks/`](../../personal/workflows-and-architecture/playbooks/):
 
-1. **Pre-run review** → go / no-go
-2. **Execution** (in `execution/`)
-3. **Audit** → *did it work?* — this is where the case ends, here in Teams.
-4. **Debrief** → *what did I learn, how did it feel?* — this happens **back in
+3. **Pre-run review** → go / no-go
+4. **Execution** *(code)* — run this case's code in `execution/`
+5. **Audit** → *did it work?* — this is where the case ends, here in Teams.
+6. **Debrief** → *what did I learn, how did it feel?* — this happens **back in
    Personal**, not here. Add `debrief-<case>.md` to
-   [`personal/disclosure-strategy/debriefs/`](../../personal/disclosure-strategy/debriefs/),
-   and fold its lessons into the playbook library.
+   [`personal/disclosure-strategy/debriefs/`](../../personal/disclosure-strategy/debriefs/).
+7. **Fold lessons into the library** — edit the playbooks in Personal so the
+   next case starts better.
 
 …with **one-off debugging** as needed along the way. Register the case in the
 [master tracker](../running-disclosures/active-disclosures-index.md).

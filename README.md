@@ -65,14 +65,48 @@ Personal** (*what did I learn, how did it feel?*). Each debrief's lessons are
 folded back into the library — that return edit is what makes the next case
 start better.
 
-## Starting a new disclosure
+## Where the code lives
 
-1. Copy `teams/disclosure-case-template/` to `teams/disclosure-<case-name>/`.
-2. Add the case to `teams/running-disclosures/active-disclosures-index.md`.
-3. Work the playbooks in order: **pre-run review → execution → audit**, with
-   **one-off debugging** as needed.
-4. After the audit, **debrief back in Personal**: add
-   `personal/disclosure-strategy/debriefs/debrief-<case>.md`, then fold its
-   lessons into `personal/workflows-and-architecture/playbooks/`.
+Code sits in **three places**, split cleanly between Personal and Teams. The
+separation is the point: Personal holds the *reusable engine*, Teams holds the
+*per-case run*.
+
+| # | Location | Space | What kind of code |
+|---|----------|-------|-------------------|
+| 1 | `personal/build-and-debug/` | **Personal** | Messy dev — spikes, experiments, throwaway scripts |
+| 2 | `personal/workflows-and-architecture/playbooks/` | **Personal** | Clean, reusable library (proven code promoted up from 1) |
+| 4 | `teams/disclosure-<case>/execution/` | **Teams** | The actual code that runs *this* case |
+
+- **Personal code (1 & 2)** = build it once, reuse it everywhere. Write rough in
+  Build & Debug, promote the proven parts into the Workflows & Architecture
+  library.
+- **Teams code (4)** = one per case. It *draws from* the Personal library; it
+  never holds the only copy of anything reusable.
+
+## Order of operations — the 7 steps
+
+The numbers above and below match: this is the order you work in, every cycle.
+
+**Build the reusable engine (Personal):**
+1. **Build & Debug** — write and debug code in `personal/build-and-debug/`. *(code)*
+2. **Promote → library** — move the proven, generalized parts into
+   `personal/workflows-and-architecture/playbooks/`. *(code)*
+
+**Run a case (Teams):**
+3. **Pre-run review** — go / no-go in `teams/disclosure-<case>/pre-run-review.md`.
+   *(First copy `teams/disclosure-case-template/` to `teams/disclosure-<case>/`
+   and register it in `teams/running-disclosures/active-disclosures-index.md`.)*
+4. **Execution** — run the case's code in `teams/disclosure-<case>/execution/`. *(code)*
+5. **Audit** — *did it work?* in `teams/disclosure-<case>/audit.md`. The case ends here.
+
+**Bring it home (Personal):**
+6. **Debrief** — *what did I learn, how did it feel?* Add
+   `personal/disclosure-strategy/debriefs/debrief-<case>.md`.
+7. **Fold lessons back into the library** — edit the playbooks in
+   `personal/workflows-and-architecture/playbooks/`. This returns you to **step 2**
+   and makes the next case start better.
+
+> …with **one-off debugging** (`teams/disclosure-<case>/one-off-debugging.md`)
+> as needed at any step.
 
 See each directory's `README.md` for detail.

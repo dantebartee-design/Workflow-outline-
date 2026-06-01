@@ -1,5 +1,8 @@
 # Build & Debug *(Cowork Project)*
 
+> **Step 1** of the [7-step order](../../README.md#order-of-operations--the-7-steps),
+> and the first of the two Personal code locations. This is where code is born.
+
 A standalone Personal Cowork project — the **messy workspace** where disclosure
 code actually gets built and debugged before it's clean enough to be reusable.
 

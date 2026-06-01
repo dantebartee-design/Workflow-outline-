@@ -14,7 +14,14 @@ fill in the case-specific detail.
 - [Debugging](./playbooks/debugging.md)
 - [Debrief](./playbooks/debrief.md) — runs in Personal *after* the audit (see below)
 
-## Where the messy code lives
+## Where this sits in the order *(steps 2 & 7)*
+
+This library is **step 2** of the [7-step order](../../README.md#order-of-operations--the-7-steps):
+proven code from Build & Debug *(step 1)* is **promoted** in here. It's also
+**step 7**: after a case's debrief, lessons are folded back into these playbooks
+so the next case starts better.
+
+## Where the messy code lives *(step 1)*
 
 Build-and-debug work is **not** here — it has its own standalone Personal Cowork
 project: [`../build-and-debug/`](../build-and-debug/). Code is written and

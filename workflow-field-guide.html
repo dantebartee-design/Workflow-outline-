@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Claude Workflow System — Operator's Field Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 18mm 14mm;
+    @bottom-center {
+      content: "Operator's Field Guide   ·   the how's & why's   ·   page " counter(page) " of " counter(pages);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 8pt;
+      color: #9aa0ad;
+    }
+  }
+
+  :root {
+    --ink:    #1c2230;
+    --muted:  #5b6472;
+    --line:   #e3e7ee;
+    --bg-soft:#f6f8fb;
+    --c0: #7c3aed; --c1: #2563eb; --c2: #0891b2; --c3: #d97706;
+    --c4: #dc2626; --c5: #4f46e5; --c6: #db2777; --c7: #059669;
+    --personal: #2563eb; --teams: #059669;
+    --why:   #2563eb; --how:   #059669; --watch: #d97706;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    color: var(--ink); font-size: 10.2pt; line-height: 1.52; margin: 0;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  h1, h2, h3, h4 { line-height: 1.22; }
+
+  /* Cover */
+  .cover {
+    background: linear-gradient(135deg, #0f172a 0%, #4f46e5 60%, #7c3aed 100%);
+    color: #fff; border-radius: 18px; padding: 30px 32px; margin-bottom: 20px;
+  }
+  .cover .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 8.5pt; opacity: .85; margin: 0 0 8px; }
+  .cover h1 { margin: 0 0 6px; font-size: 25pt; font-weight: 800; letter-spacing: -0.5px; }
+  .cover .sub { font-size: 13pt; font-weight: 600; opacity: .95; margin: 0 0 12px; }
+  .cover p { margin: 0; font-size: 10pt; opacity: .92; max-width: 86%; }
+  .cover .meta { margin-top: 16px; font-size: 8.5pt; opacity: .8; }
+
+  /* Intro band */
+  .band {
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 8px;
+  }
+  .band h3 { margin: 0 0 6px; font-size: 10pt; }
+  .band p { margin: 0; font-size: 9.6pt; color: var(--muted); }
+  .band p + p { margin-top: 6px; }
+
+  /* Section headers */
+  section { break-inside: auto; }
+  .sec-head {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--line);
+    break-after: avoid;
+  }
+  .sec-num {
+    flex: 0 0 auto; width: 30px; height: 30px; border-radius: 9px;
+    background: var(--ink); color: #fff; font-weight: 800; font-size: 13pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sec-head h2 { margin: 0; font-size: 15pt; font-weight: 800; letter-spacing: -0.3px; }
+  .sec-head .kicker { margin-left: auto; font-size: 8pt; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; }
+
+  p.lead { color: var(--muted); margin: 0 0 14px; font-size: 10pt; }
+
+  /* Principle box */
+  .principle {
+    border-left: 5px solid var(--c5); background: #f5f3ff;
+    border-radius: 0 10px 10px 0; padding: 11px 16px; margin: 0 0 14px;
+    break-inside: avoid;
+  }
+  .principle .plabel { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1.5px; color: var(--c5); font-weight: 800; }
+  .principle p { margin: 3px 0 0; font-size: 10.4pt; font-weight: 600; }
+
+  /* Entry block (per step / concept) */
+  .entry { border: 1px solid var(--line); border-radius: 12px; padding: 0; margin-bottom: 13px; overflow: hidden; break-inside: avoid; }
+  .entry > .head {
+    display: flex; align-items: center; gap: 11px; padding: 9px 14px;
+    border-bottom: 1px solid var(--line); background: #fbfcfe;
+  }
+  .entry > .head .chip {
+    flex: 0 0 auto; min-width: 30px; height: 30px; padding: 0 9px; border-radius: 8px;
+    color: #fff; font-weight: 800; font-size: 13pt; display: flex; align-items: center; justify-content: center;
+  }
+  .entry > .head .ttl { font-weight: 800; font-size: 11.4pt; }
+  .entry > .head .where {
+    display: inline-block; font-size: 7.4pt; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    padding: 2px 8px; border-radius: 20px; margin-left: 7px; vertical-align: middle;
+  }
+  .pill-personal { background: #e8f0fe; color: var(--personal); }
+  .pill-teams    { background: #e6f6ef; color: var(--teams); }
+  .pill-lib      { background: #e2f5f9; color: var(--c2); }
+  .pill-both     { background: #ede9fe; color: var(--c5); }
+
+  .entry .qa { padding: 4px 14px 11px; }
+  .qa .line { display: flex; gap: 10px; padding: 8px 0; border-top: 1px dashed var(--line); }
+  .qa .line:first-child { border-top: none; }
+  .qa .tag {
+    flex: 0 0 64px; font-size: 7.6pt; font-weight: 800; text-transform: uppercase; letter-spacing: .6px;
+    padding-top: 2px;
+  }
+  .qa .tag.why   { color: var(--why); }
+  .qa .tag.how   { color: var(--how); }
+  .qa .tag.watch { color: var(--watch); }
+  .qa .txt { flex: 1; font-size: 9.6pt; }
+  .qa .txt b { font-weight: 700; }
+  .qa .txt ul { margin: 4px 0 0; padding-left: 16px; }
+  .qa .txt li { margin: 2px 0; }
+
+  /* Inline callout / aside */
+  .aside {
+    border: 1px solid var(--line); border-left: 4px solid var(--c3);
+    background: #fffbeb; border-radius: 0 9px 9px 0; padding: 10px 14px; margin: 0 0 13px; break-inside: avoid;
+  }
+  .aside .al { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1.2px; color: var(--c3); font-weight: 800; }
+  .aside p { margin: 3px 0 0; font-size: 9.6pt; }
+
+  .note-blue { border-left-color: var(--c1); background: #eff6ff; }
+  .note-blue .al { color: var(--c1); }
+  .note-green { border-left-color: var(--c7); background: #f0fdf4; }
+  .note-green .al { color: var(--c7); }
+
+  /* Decision rule strip */
+  .rules { display: flex; flex-direction: column; gap: 7px; margin: 4px 0 13px; }
+  .rule { display: flex; align-items: baseline; gap: 10px; border: 1px solid var(--line); border-radius: 9px; padding: 8px 13px; break-inside: avoid; }
+  .rule .if { flex: 0 0 46%; font-size: 9.5pt; }
+  .rule .if b { color: var(--ink); }
+  .rule .ar { color: #94a3b8; font-weight: 800; }
+  .rule .then { flex: 1; font-size: 9.5pt; font-weight: 700; }
+  .rule .then.go-cowork { color: var(--c3); }
+  .rule .then.go-chat   { color: #475569; }
+  .rule .then.go-personal { color: var(--personal); }
+  .rule .then.go-teams  { color: var(--teams); }
+
+  /* Two-col compare */
+  .split { display: flex; gap: 12px; margin: 2px 0 13px; }
+  .split .col { flex: 1; border-radius: 10px; padding: 11px 14px; break-inside: avoid; }
+  .col h4 { margin: 0 0 6px; font-size: 9.4pt; text-transform: uppercase; letter-spacing: .5px; }
+  .col p { margin: 0 0 6px; font-size: 9.3pt; }
+  .col-a { background: #eff6ff; border: 1px solid #bfdbfe; } .col-a h4 { color: var(--c1); }
+  .col-b { background: #fdf2f8; border: 1px solid #fbcfe8; } .col-b h4 { color: var(--c6); }
+  .col-c { background: #f0fdf4; border: 1px solid #bbf7d0; } .col-c h4 { color: var(--c7); }
+
+  /* Big callout */
+  .callout { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; border-radius: 12px; padding: 15px 18px; margin: 4px 0 13px; break-inside: avoid; }
+  .callout .big { font-size: 11.5pt; font-weight: 800; margin-bottom: 8px; }
+  .callout p { margin: 6px 0 0; font-size: 9.5pt; opacity: .92; }
+  .callout .arrow-line { margin-top: 11px; font-family: 'SF Mono', monospace; font-size: 9pt; color: #6ee7b7; text-align: center; }
+
+  .footer-note { margin-top: 20px; text-align: center; color: var(--muted); font-size: 8.6pt; font-style: italic; }
+  .q-emphasis { font-style: italic; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="eyebrow">Companion to the Complete Reference</p>
+  <h1>Operator's Field Guide</h1>
+  <div class="sub">The how's &amp; why's — written for you, not the lawyer</div>
+  <p>The Complete Reference tells you <i>what</i> the system is. This guide tells you <i>why each piece exists</i>, <i>how to actually run it</i>, and <i>where it tends to break</i>. This is back-stage — your thinking document.</p>
+  <div class="meta">Read it once end-to-end · then dip into a single entry when a step feels unclear</div>
+</div>
+
+<div class="band">
+  <h3>How to read this guide</h3>
+  <p>Every entry below uses the same three lenses, so you can scan for the one you need:</p>
+  <p><b style="color:var(--why)">WHY</b> — the reasoning behind the design choice (this is the part the clean reference leaves out). &nbsp; <b style="color:var(--how)">HOW</b> — what you concretely do when you're in it. &nbsp; <b style="color:var(--watch)">WATCH</b> — the failure mode that quietly kills the step if you let it.</p>
+</div>
+
+<!-- ===================== THE TWO SPLITS ===================== -->
+<section>
+  <div class="sec-head"><div class="sec-num">A</div><h2>The Two Splits Everything Hangs On</h2><span class="kicker">read this first</span></div>
+  <p class="lead">Before the seven steps make sense, two distinctions have to click. Almost every "where does this go?" question is really one of these two.</p>
+
+  <div class="principle">
+    <div class="plabel">Core principle</div>
+    <p>Separate the space where you <i>think and learn</i> from the space where you <i>perform and record</i> — and separate <i>conversation you'll consume once</i> from <i>structure you'll reuse</i>. Keep those four quadrants clean and the whole system runs itself.</p>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c5)">1</div><div><span class="ttl">Personal vs. Teams</span> <span class="where pill-both">audience &amp; mode</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Two different reasons to split. <b>(1) Record:</b> Teams is the shared, case-bound, official trail — anything there is part of the engagement. Personal is yours alone. <b>(2) Mode:</b> Personal is where you think freely, try bad ideas, and feel things. Teams is where you perform and document. If you mix them, you do one of two damaging things — dump your mess into the official record, or self-censor your real thinking because it's in a shared space. The split lets you be fully messy <i>and</i> fully professional, just in different rooms.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Ask: <span class="q-emphasis">"Would I be comfortable with the lawyer or the team scrolling this?"</span> If the honest answer is "not yet / not all of it" → Personal. If it's case fact meant for the shared trail → Teams.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">The sneaky failure is doing your <i>learning</i> inside Teams because it's "more efficient." It isn't — it pollutes the case record and makes you guarded. Build and debrief stay Personal, always.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c3)">2</div><div><span class="ttl">Cowork vs. Chat</span> <span class="where pill-both">reuse test</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt"><b>Chat</b> is linear — a conversation you have, consume, and move past. <b>Cowork</b> is structural — executable artifacts, code, templates, things you'll pull <i>into</i> other work later. The mechanical difference is durability: a Chat is a moment; a Cowork object is an asset. Put a reusable asset in Chat and it gets buried in scrollback. Put a one-off conversation in Cowork and it clutters your library with noise.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">One question decides it: <span class="q-emphasis">"Will I want to reference this object from inside another project later?"</span> Yes → Cowork. No, it's thinking/feedback → Chat.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Don't let valuable structure (a playbook, a template, a working script) live out its life in a Chat thread. The instant something becomes reusable, it wants to be promoted into Cowork — that's literally what Step 2 is.</div></div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><div class="if"><b>Messy code, half-built, exploring</b></div><div class="ar">→</div><div class="then go-personal">Personal · Cowork</div></div>
+    <div class="rule"><div class="if"><b>Proven asset you'll reuse</b></div><div class="ar">→</div><div class="then go-cowork">Library (Workflows &amp; Architecture)</div></div>
+    <div class="rule"><div class="if"><b>Judgement / "does this look right?"</b></div><div class="ar">→</div><div class="then go-chat">A Chat project</div></div>
+    <div class="rule"><div class="if"><b>Processing how it went, for you</b></div><div class="ar">→</div><div class="then go-personal">Personal · Chat</div></div>
+    <div class="rule"><div class="if"><b>Factual record of a real run</b></div><div class="ar">→</div><div class="then go-teams">Teams (Chat for notes, Cowork for the run)</div></div>
+  </div>
+</section>
+
+<!-- ===================== THE SEVEN STEPS ===================== -->
+<section>
+  <div class="sec-head"><div class="sec-num">B</div><h2>The Seven Steps — Why Each One Earns Its Place</h2><span class="kicker">the engine</span></div>
+  <p class="lead">The order isn't arbitrary. Each step exists to protect the one after it. Read each entry's <b style="color:var(--why)">WHY</b> as "what goes wrong if this step didn't exist."</p>
+
+  <div class="principle">
+    <div class="plabel">The shape of the loop</div>
+    <p>Build → prove → gate → run → record facts → process feeling → fold back. It's a <i>learning loop</i>, not a checklist. The entire payoff is that disclosure N+1 costs less than disclosure N — because every cycle leaves the Vision sharper and the Library richer.</p>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c0)">0</div><div><span class="ttl">Vision — the North Star</span> <span class="where pill-lib">above everything</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Every tactical call below — <i>"build this?", "automate that?", "is this good enough to ship?"</i> — needs a reference point. Without a North Star you optimize <b>locally</b>: each disclosure gets marginally better while you quietly drift from what actually matters. The Vision is the tiebreaker. It sits above the seven steps because it's the thing you check when two options both look reasonable.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Write it down in one short paragraph and pin it in the Library. Phrase it as outcomes, not tasks. Re-read it at Step 7 and let it evolve — a North Star that never changes probably isn't being used.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">A vision you wrote once and never look at is decoration. If you're not consulting it when you make hard calls, it isn't doing its job.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c1)">1</div><div><span class="ttl">Build &amp; Debug</span> <span class="where pill-personal">Personal · Cowork</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Building is messy by nature — dead ends, half-thoughts, code you'd never show anyone. That needs <b>psychological safety</b>: a room where bad work is expected and fine. Do it in the Teams space and two things break — you pollute the shared record, and you self-censor, which kills the experimentation that makes building work. It's Cowork because the <i>output</i> is an executable artifact, not a chat.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Treat it as a sandbox. Iterate hard, break things, don't clean up yet, don't promote anything. The only goal of Step 1 is: <b>a thing that works once</b> — even if it's ugly.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Polishing too early. Don't make it pretty here — pretty is Step 2's job. And resist using it on a real case before it's proven; the sandbox is not the run.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c2)">2</div><div><span class="ttl">Promote to Library</span> <span class="where pill-lib">→ Workflows &amp; Architecture</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">"It worked once in my sandbox" is <i>not</i> "it's a reusable asset." Promotion is the deliberate act that converts the two. Without an explicit promotion gate your Library never accumulates — you rebuild the same thing every disclosure and never compound. The gate also forces an honest question: <span class="q-emphasis">"Is this actually proven, or did it just happen to work once?"</span></div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Take the thing that worked, <b>strip the case-specific bits</b>, generalize it, and write a short "when &amp; how to use this" note next to it. Then place it in Workflows &amp; Architecture. That note is what makes it findable and trustable later.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Promoting too eagerly. If it's only run once, it's a candidate, not a proven asset — say so in the note. A library full of unproven "assets" is as useless as no library.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c3)">3</div><div><span class="ttl">Pre-run Review</span> <span class="where pill-teams">Teams · Chat</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Execution (Step 4) is the costly, consequential part — a real run on a real case. Catching a problem <i>before</i> the run is an order of magnitude cheaper than catching it mid-run. This is your <b>quality gate</b>. It's Chat because reviewing is judgement and conversation — <i>"does this look right? what could go wrong?"</i> — not code production. It's Teams because it's case work and belongs in the shared trail.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Walk the plan end-to-end against the playbook. Sanity-check the inputs. Ask the one productive question: <span class="q-emphasis">"What would make this fail?"</span> — and resolve those before you touch Step 4.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Skipping the gate when you feel confident. Confidence is exactly when sloppy runs happen. The review is cheap; pay it every time.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c4)">4</div><div><span class="ttl">Execution</span> <span class="where pill-teams">Teams · Cowork</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">This is the actual run — executable work on real artifacts, so it's Cowork; it's the case, so it's Teams. It's kept separate from Build for a reason: <b>you execute using proven Library assets, you don't improvise here.</b> Execution is performance, not experimentation.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Run the proven playbook against the real case. Follow it; don't redesign it mid-run.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Catching yourself <i>building</i> during execution. That's a signal something wasn't actually ready — don't fix the system live. Note the gap and carry it to the debrief, then back into Build/Library.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c5)">5</div><div><span class="ttl">Audit</span> <span class="where pill-teams">Teams · Chat</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Right after the run the details are freshest — and they decay fast. The audit captures <b>what mechanically happened</b>: what ran, what broke, what took longer than planned, what the outputs were. It's deliberately kept separate from the debrief because <i>facts and feelings are different modes</i> and mixing them muddies both. The audit is the objective record; it's Teams Chat because it's case fact, conversational.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Log the concrete sequence: steps as they actually went, every deviation from plan, every anomaly. No interpretation yet — just the nuts and bolts.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Letting emotion leak in ("that was a nightmare"). Park feelings for Step 6. And don't postpone — an audit written tomorrow has already lost half its detail.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c6)">6</div><div><span class="ttl">Debrief — the trip home</span> <span class="where pill-personal">Personal · Chat</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">This one is about <b>you</b>: what you learned, what clicked, what frustrated you, what you'd change. That's personal processing, not team record — so it's Personal. It's the "trip home after the audit": you file the facts at the office (Teams), then go home (Personal) and process how it actually went for you. This is where the system's <i>learning</i> lives. Skip it and you execute forever without ever getting better.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Answer four questions honestly: <span class="q-emphasis">What surprised me? What did I learn? What do I want to change? How did it feel?</span> Feelings are data here — frustration usually points at a real gap in the playbook.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Treating the debrief as optional because "the work is done." The run is done; the <i>compounding</i> hasn't happened yet. No debrief, no improvement.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c7)">7</div><div><span class="ttl">Fold Lessons Back</span> <span class="where pill-lib">→ Vision + Library</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Lessons that aren't written into something <b>durable</b> evaporate within days. This is the step that makes the whole system compound. It feeds <b>Step 0 (Vision)</b> and <b>Step 2 (Library)</b> specifically because those are the only two <i>persistent</i> stores — everything else is transient, per-disclosure. Folding back is how a one-time insight becomes a permanent upgrade.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Make concrete edits: update the pinned Vision if your direction shifted; update or add a playbook in the Library; promote any new proven asset. The test is whether the <i>next</i> disclosure will actually start from a better place.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Debriefing and then doing nothing with it. A debrief that doesn't change the Vision or the Library is just journaling — the loop stays open.</div></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="big">Why the loop has this exact shape</div>
+    <p>Each step protects the next. Build gives Promote something proven to lift. Promote gives Execution a real asset instead of improvisation. The Pre-run gate protects the costly run. Audit captures facts before they fade so the Debrief has something true to reflect on. The Debrief produces the learning that Fold-Back makes permanent — which raises the floor for the next Build.</p>
+    <div class="arrow-line">Build → Prove → Gate → Run → Record → Reflect → Fold back → (better) Build</div>
+  </div>
+</section>
+
+<!-- ===================== ACTION PLAN WHY ===================== -->
+<section>
+  <div class="sec-head"><div class="sec-num">C</div><h2>Why the Action Plan Runs In That Order</h2><span class="kicker">sequencing logic</span></div>
+  <p class="lead">The phases aren't just a to-do list — the order is the whole point. Here's the reasoning behind each handoff.</p>
+
+  <div class="aside note-blue">
+    <div class="al">Why cleanup comes first (Phase 1)</div>
+    <p>You can't build a clean system on a messy foundation — start the new workflow on top of disorganized files and you simply <b>import the chaos</b>. Cleanup makes room for the new structure to live. And the file audit itself is informative: it shows you what you actually have and use, which tells you what the Library should hold.</p>
+  </div>
+
+  <div class="aside note-blue">
+    <div class="al">Why document the workflow before running it (Phase 1 → 2)</div>
+    <p>Disclosure Two is partly a <b>test of the system itself</b>. If the workflow isn't written down, you can't tell whether a problem came from the case or from the system — the two get tangled. Documentation makes the system <i>inspectable</i>, so the first real run can debug the process, not just the case.</p>
+  </div>
+
+  <div class="aside note-blue">
+    <div class="al">Why the lawyer-facing pieces are built in Phase 2, before the run</div>
+    <p>The Playbook Template and the "Lawyer Ideas &amp; Requests" project are the <b>front-stage</b>. Setting them up before Disclosure Two means that when you run, you already know what the clean deliverable looks like — so you can capture it <i>as you go</i> instead of reconstructing it afterward from memory.</p>
+  </div>
+
+  <div class="aside note-green">
+    <div class="al">Why update the Value Timeline with real data after Disclosure Two (Phase 3)</div>
+    <p>Your first timeline is a guess. Guesses don't persuade — yours or the lawyer's. The moment you have <b>one real number</b> (how long Disclosure Two actually took under the system), the whole case for the system stops being a pitch and becomes evidence. Replace estimates with reality the instant you have it.</p>
+  </div>
+
+  <div class="aside">
+    <div class="al">Why automation is last, and gated on 2–3 manual runs (Phase 4)</div>
+    <p>This is the big one — see Section E. In short: you can only automate a process that has <b>stopped changing</b>. Two to three manual runs is roughly when the playbook stabilizes. Automate before that and you're building on a moving target, so the build keeps breaking as the process shifts under it.</p>
+  </div>
+</section>
+
+<!-- ===================== KEY CONCEPTS DEEP ===================== -->
+<section>
+  <div class="sec-head"><div class="sec-num">D</div><h2>The Concepts, With the Reasoning Restored</h2><span class="kicker">deep cuts</span></div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c6)">§</div><div><span class="ttl">The Lawyer Playbook Separation</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt"><b>Two audiences need two different artifacts.</b> The lawyer needs <i>confidence and clarity</i> — a clean deliverable, a simple playbook, a status. They do not need (and shouldn't see) your iterations, debates, and dead ends; that mess <i>erodes</i> their confidence and burns their attention. Meanwhile <b>you</b> need that exact mess — the full record of iterations is where your learning lives. So you deliberately maintain both: a clean <b>front-stage</b> for them, a rich <b>back-stage</b> for you.</div></div>
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Collapsing the two — in either direction. Dumping back-stage mess on the lawyer destroys confidence. Throwing away your back-stage to "look clean" destroys your learning. Keep them separate on purpose.</div></div>
+    </div>
+    <div class="split">
+      <div class="col col-a"><h4>Front-stage · the lawyer sees</h4><p>Clean deliverable · simple one-page playbook · status updates. <b>Built for confidence.</b></p></div>
+      <div class="col col-b"><h4>Back-stage · only you see</h4><p>Every iteration · the debates · the cleanup · the learning. <b>Built for compounding.</b></p></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c7)">§</div><div><span class="ttl">The Value Timeline</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">It's your <b>justification engine</b>, pulling double duty. For <i>you</i> it's motivation — proof the front-loaded effort pays off, so you don't quit during the expensive first run. For the <i>lawyer</i> it's ROI — a legible picture of what the system saves. Three timelines side by side make the investment visible in a way a paragraph never could.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Hold the three lines in mind as you work:</div></div>
+    </div>
+    <div class="split">
+      <div class="col col-b"><h4>1 · No system</h4><p><b>12–15 hrs</b> per disclosure — and it stays there forever. The counterfactual.</p></div>
+      <div class="col col-a"><h4>2 · With system</h4><p>D1 <b>12h</b> (build) → D2 <b>6h</b> (refine) → D3 <b>4h</b> (execute). Front-loaded, then it pays.</p></div>
+      <div class="col col-c"><h4>3 · With automation</h4><p>D4+ <b>~30 min</b> to trigger; the system runs itself. The payoff curve.</p></div>
+    </div>
+    <div class="qa">
+      <div class="line"><div class="tag watch">Watch</div><div class="txt">Leaving it as estimates. The chart only persuades once it's real — overwrite the guesses with measured hours as soon as Disclosure Two gives you a true number.</div></div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="head"><div class="chip" style="background:var(--c2)">§</div><div><span class="ttl">The Library (Workflows &amp; Architecture) as the system's memory</span></div></div>
+    <div class="qa">
+      <div class="line"><div class="tag why">Why</div><div class="txt">Of everything in the system, only two things <b>persist</b> across disclosures: the Vision and the Library. Everything else is per-case and disposable. That's why both Promote (Step 2) and Fold-Back (Step 7) point <i>here</i> — the Library is the system's long-term memory. A thin library means every disclosure starts near zero; a rich one means each starts further along. It's also where agents will eventually live, because an agent is just an executable Library asset.</div></div>
+      <div class="line"><div class="tag how">How</div><div class="txt">Keep it curated, not a junk drawer. Pin the workflow diagram and the conversation summary. Every asset gets a short "when &amp; how to use" note. Prune things that proved wrong.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AUTOMATION WHY ===================== -->
+<section>
+  <div class="sec-head"><div class="sec-num">E</div><h2>The Automation Path — Why You Wait</h2><span class="kicker">the long game</span></div>
+  <p class="lead">This is the most counterintuitive part of the system, so it gets its own deep treatment. The instinct is to automate early. The instinct is wrong, and here's exactly why.</p>
+
+  <div class="principle">
+    <div class="plabel">The one rule</div>
+    <p>The agent doesn't <i>invent</i> the process — it <i>executes</i> the one you've already proven works. An agent is the automation version of a playbook that already exists. No stable playbook, no agent.</p>
+  </div>
+
+  <div class="split">
+    <div class="col col-a"><h4>Phase 1 · Manual</h4><p>You run disclosures by hand. The real job here isn't just doing them — it's <b>learning, documenting, and debriefing</b> so the process becomes legible.</p></div>
+    <div class="col col-a"><h4>Phase 2 · Playbook</h4><p>After a few runs you have a <b>solid, stable</b> playbook — one that stopped changing between disclosures. That stability is the signal you're ready.</p></div>
+    <div class="col col-c"><h4>Phase 3 · Agent</h4><p>Using the Agent SDK and your API key, you teach an agent to <b>follow that proven playbook</b>. It lives in the Library and runs what you already trust.</p></div>
+  </div>
+
+  <div class="aside">
+    <div class="al">Why automating early is the classic trap</div>
+    <p>If you automate a process you haven't proven, you <b>automate your mistakes</b> — and now they run faster, at scale, and you trust them less, not more. Worse, an unproven process is still <i>changing</i>: every disclosure you discover a better way. Automation built on a moving target keeps breaking, so all that build effort gets spent re-fixing the agent instead of doing disclosures. You'd be paying the highest-effort cost (building an agent) on the lowest-certainty input (a process you don't yet trust).</p>
+  </div>
+
+  <div class="aside note-green">
+    <div class="al">Why 2–3 manual runs is the threshold</div>
+    <p>One run proves nothing — it might've been luck or a tame case. By the second and third, you can see which parts are <b>stable</b> (same every time → safe to automate) and which are still <b>judgement calls</b> (different every time → keep human). That distinction is exactly the design spec for the agent: automate the stable spine, leave the judgement to you, and keep a review-and-approve checkpoint so you stay in the loop.</p>
+  </div>
+
+  <div class="callout">
+    <div class="big">The direction is one-way</div>
+    <p>You move from manual proof, to a written playbook, to an agent — and never the reverse. Every attempt to jump straight to the agent skips the only thing that makes the agent trustworthy: a process you've already watched succeed with your own hands.</p>
+    <div class="arrow-line">Manual proof ──► Playbook ──► Agent &nbsp;&nbsp;(never the other way around)</div>
+  </div>
+
+  <div class="footer-note">Back-stage document — keep it in Personal / the Library. Revisit and edit it at every Step 7, the same as the Vision.</div>
+</section>
+
+</body>
+</html>

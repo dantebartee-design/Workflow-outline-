@@ -1,5 +1,7 @@
 # Workflow Outline
 
+![Workflow structure](docs/structure.png)
+
 A repository scaffold mirroring how Disclosure work is organized across
 **Personal** and **Teams** spaces, using a mix of *Chat Projects* (thinking,
 tracking, review) and *Cowork Projects* (code and execution).

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1090" viewBox="0 0 1180 1090" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1150" viewBox="0 0 1180 1150" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
   <defs>
     <style>
       .title    { font-size: 30px; font-weight: 700; fill: #1a1a2e; }
@@ -27,13 +27,16 @@
     <marker id="arrLoop" markerWidth="11" markerHeight="11" refX="6" refY="3.5" orient="auto">
       <path d="M0,0 L7,3.5 L0,7 Z" fill="#d97706"/>
     </marker>
+    <marker id="arrInd" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#4f46e5"/>
+    </marker>
   </defs>
 
-  <rect width="1180" height="1090" fill="#f7f8fb"/>
+  <rect width="1180" height="1150" fill="#f7f8fb"/>
 
   <!-- Header -->
   <text x="40" y="50" class="title">Workflow Outline</text>
-  <text x="40" y="74" class="subtitle">A learning loop, in 7 numbered steps.  ① = order of work.  &lt;/&gt; = where code lives.</text>
+  <text x="40" y="74" class="subtitle">A North Star (step 0) plus a repeating 7-step loop.  ① = order of work.  &lt;/&gt; = where code lives.</text>
 
   <!-- Legend -->
   <g transform="translate(636,20)">
@@ -78,8 +81,9 @@
     <circle cx="228" cy="166" r="11" fill="#d97706"/><text x="228" y="170" text-anchor="middle" class="stepnum">6</text>
     <text x="32" y="190" class="leaf">feelings &amp; learning —</text>
     <text x="32" y="208" class="leaf">home after the audit</text>
-    <text x="18" y="236" class="leafmuted">reflective home for cases</text>
+    <text x="18" y="236" class="leafsub">★ North Star — informs all steps</text>
   </g>
+  <circle cx="52" cy="150" r="13" fill="#d97706" stroke="#ffffff" stroke-width="2"/><text x="52" y="155" text-anchor="middle" class="stepnum">0</text>
 
   <!-- Personal Explorations -->
   <g transform="translate(324,150)">
@@ -176,68 +180,79 @@
   <rect x="576" y="474" width="178" height="20" rx="10" fill="#f7f8fb"/>
   <text x="582" y="489" class="legtxt">library → draws into case (step 4)</text>
 
-  <!-- ============ 7-STEP CYCLE PANEL ============ -->
-  <rect x="30" y="812" width="1120" height="250" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="52" y="840" class="looptxt">THE 7-STEP CYCLE</text>
-  <text x="232" y="840" class="loopcap">build the engine (Personal) → run the case (Teams) → bring it home (Personal) → repeat</text>
+  <!-- ============ CYCLE PANEL ============ -->
+  <rect x="30" y="812" width="1120" height="318" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="52" y="840" class="looptxt">THE CYCLE — a North Star + 7 steps</text>
+  <text x="320" y="840" class="loopcap">the north star sets the “why”; the 7 steps repeat beneath it</text>
+
+  <!-- Step 0 · North Star banner -->
+  <rect x="52" y="852" width="1056" height="34" rx="17" fill="#e7e9fb" stroke="#b9c0f5"/>
+  <circle cx="74" cy="869" r="12" fill="#d97706"/><text x="74" y="873" text-anchor="middle" class="stepnum">0</text>
+  <text x="94" y="873" class="leafhi">★ Vision — the North Star</text>
+  <text x="300" y="873" class="leaf">sets the “why” behind every step below</text>
+  <text x="930" y="873" class="leafhi">↓ informs all 7 steps</text>
 
   <!-- phase bands -->
-  <rect x="52" y="858" width="366" height="82" rx="8" fill="#eef0fb"/>
-  <text x="64" y="876" class="phase">A · Build the engine — Personal (code)</text>
-  <rect x="430" y="858" width="416" height="82" rx="8" fill="#fef3f2"/>
-  <text x="442" y="876" class="phase">B · Run the case — Teams</text>
-  <rect x="858" y="858" width="250" height="82" rx="8" fill="#eef0fb"/>
-  <text x="870" y="876" class="phase">C · Bring it home — Personal</text>
+  <rect x="52" y="900" width="366" height="80" rx="8" fill="#eef0fb"/>
+  <text x="64" y="918" class="phase">A · Build the engine — Personal (code)</text>
+  <rect x="430" y="900" width="416" height="80" rx="8" fill="#fef3f2"/>
+  <text x="442" y="918" class="phase">B · Run the case — Teams</text>
+  <rect x="858" y="900" width="250" height="80" rx="8" fill="#eef0fb"/>
+  <text x="870" y="918" class="phase">C · Bring it home</text>
 
   <!-- pills (single numbered row) -->
   <!-- 1 Build & Debug (P, code) -->
-  <rect x="64" y="898" width="150" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
-  <circle cx="83" cy="917" r="11" fill="#d97706"/><text x="83" y="921" text-anchor="middle" class="stepnum">1</text>
-  <text x="100" y="921" class="pill">Build &amp; Debug</text>
-  <text x="196" y="921" class="codeglyph">&lt;/&gt;</text>
-  <line x1="216" y1="917" x2="234" y2="917" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="64" y="938" width="150" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
+  <circle cx="83" cy="957" r="11" fill="#d97706"/><text x="83" y="961" text-anchor="middle" class="stepnum">1</text>
+  <text x="100" y="961" class="pill">Build &amp; Debug</text>
+  <text x="196" y="961" class="codeglyph">&lt;/&gt;</text>
+  <line x1="216" y1="957" x2="234" y2="957" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
   <!-- 2 Promote -> library (P, code) -->
-  <rect x="236" y="898" width="172" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
-  <circle cx="255" cy="917" r="11" fill="#d97706"/><text x="255" y="921" text-anchor="middle" class="stepnum">2</text>
-  <text x="272" y="921" class="pill">Promote → library</text>
-  <text x="390" y="921" class="codeglyph">&lt;/&gt;</text>
+  <rect x="236" y="938" width="172" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
+  <circle cx="255" cy="957" r="11" fill="#d97706"/><text x="255" y="961" text-anchor="middle" class="stepnum">2</text>
+  <text x="272" y="961" class="pill">Promote → library</text>
+  <text x="390" y="961" class="codeglyph">&lt;/&gt;</text>
 
   <!-- A -> B connector -->
-  <line x1="410" y1="917" x2="440" y2="917" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="410" y1="957" x2="440" y2="957" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
   <!-- 3 Pre-run review (T) -->
-  <rect x="442" y="898" width="138" height="38" rx="19" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
-  <circle cx="461" cy="917" r="11" fill="#d97706"/><text x="461" y="921" text-anchor="middle" class="stepnum">3</text>
-  <text x="478" y="921" class="pill">Pre-run review</text>
-  <line x1="580" y1="917" x2="598" y2="917" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="442" y="938" width="138" height="38" rx="19" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
+  <circle cx="461" cy="957" r="11" fill="#d97706"/><text x="461" y="961" text-anchor="middle" class="stepnum">3</text>
+  <text x="478" y="961" class="pill">Pre-run review</text>
+  <line x1="580" y1="957" x2="598" y2="957" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
   <!-- 4 Execution (T, code) -->
-  <rect x="600" y="898" width="126" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
-  <circle cx="619" cy="917" r="11" fill="#d97706"/><text x="619" y="921" text-anchor="middle" class="stepnum">4</text>
-  <text x="636" y="921" class="pill">Execution</text>
-  <text x="706" y="921" class="codeglyph">&lt;/&gt;</text>
-  <line x1="726" y1="917" x2="744" y2="917" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="600" y="938" width="126" height="38" rx="19" fill="#ffffff" stroke="#0e9488" stroke-width="2"/>
+  <circle cx="619" cy="957" r="11" fill="#d97706"/><text x="619" y="961" text-anchor="middle" class="stepnum">4</text>
+  <text x="636" y="961" class="pill">Execution</text>
+  <text x="706" y="961" class="codeglyph">&lt;/&gt;</text>
+  <line x1="726" y1="957" x2="744" y2="957" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
   <!-- 5 Audit (T) -->
-  <rect x="746" y="898" width="92" height="38" rx="19" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
-  <circle cx="765" cy="917" r="11" fill="#d97706"/><text x="765" y="921" text-anchor="middle" class="stepnum">5</text>
-  <text x="782" y="921" class="pill">Audit</text>
+  <rect x="746" y="938" width="92" height="38" rx="19" fill="#ffffff" stroke="#b91c1c" stroke-width="2"/>
+  <circle cx="765" cy="957" r="11" fill="#d97706"/><text x="765" y="961" text-anchor="middle" class="stepnum">5</text>
+  <text x="782" y="961" class="pill">Audit</text>
 
   <!-- B -> C connector -->
-  <line x1="838" y1="917" x2="868" y2="917" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="838" y1="957" x2="868" y2="957" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arr)"/>
 
   <!-- 6 Debrief (P) -->
-  <rect x="870" y="898" width="228" height="38" rx="19" fill="#ffffff" stroke="#4f46e5" stroke-width="2"/>
-  <circle cx="889" cy="917" r="11" fill="#d97706"/><text x="889" y="921" text-anchor="middle" class="stepnum">6</text>
-  <text x="906" y="921" class="pill">Debrief — feelings &amp; learning</text>
+  <rect x="870" y="938" width="228" height="38" rx="19" fill="#ffffff" stroke="#4f46e5" stroke-width="2"/>
+  <circle cx="889" cy="957" r="11" fill="#d97706"/><text x="889" y="961" text-anchor="middle" class="stepnum">6</text>
+  <text x="906" y="961" class="pill">Debrief — feelings &amp; learning</text>
+
+  <!-- debrief -> vision (refine the north star) -->
+  <path d="M1012,938 C1012,908 1012,900 1012,888" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrInd)"/>
+  <text x="1024" y="930" class="leafhi" font-size="11">refine vision ↑</text>
 
   <!-- 7 return arc: debrief -> library -->
-  <path d="M984,936 C984,1012 322,1012 322,936" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arrLoop)"/>
-  <rect x="468" y="1000" width="370" height="26" rx="13" fill="#ffffff" stroke="#f0d9b5"/>
-  <circle cx="488" cy="1013" r="11" fill="#d97706"/><text x="488" y="1017" text-anchor="middle" class="stepnum">7</text>
-  <text x="506" y="1018" class="looptxt">fold lessons back into the library</text>
+  <path d="M984,976 C984,1064 322,1064 322,976" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#arrLoop)"/>
+  <rect x="456" y="1052" width="394" height="26" rx="13" fill="#ffffff" stroke="#f0d9b5"/>
+  <circle cx="476" cy="1065" r="11" fill="#d97706"/><text x="476" y="1069" text-anchor="middle" class="stepnum">7</text>
+  <text x="494" y="1070" class="looptxt">fold lessons into the library (and vision)</text>
 
   <!-- debugging side note -->
-  <text x="52" y="1050" class="loopcap">…with one-off debugging as needed at any step.</text>
+  <text x="52" y="1108" class="loopcap">…with one-off debugging as needed at any step.</text>
 </svg>

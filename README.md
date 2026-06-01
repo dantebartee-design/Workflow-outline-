@@ -83,9 +83,15 @@ separation is the point: Personal holds the *reusable engine*, Teams holds the
 - **Teams code (4)** = one per case. It *draws from* the Personal library; it
   never holds the only copy of anything reusable.
 
-## Order of operations — the 7 steps
+## Order of operations — a North Star + 7 steps
 
-The numbers above and below match: this is the order you work in, every cycle.
+**Step 0 · Vision — the North Star (Personal, standing).**
+Disclosure Strategy (`personal/disclosure-strategy/`) sets the *why* behind
+everything. It isn't redone each cycle — it sits *above* the loop, informs every
+step below, and gets **refined by the debrief** (step 6 feeds back here, not just
+into the library). Set/clarify it before you build or run anything.
+
+The numbered steps below repeat every cycle, under that north star:
 
 **Build the reusable engine (Personal):**
 1. **Build & Debug** — write and debug code in `personal/build-and-debug/`. *(code)*
@@ -102,9 +108,9 @@ The numbers above and below match: this is the order you work in, every cycle.
 **Bring it home (Personal):**
 6. **Debrief** — *what did I learn, how did it feel?* Add
    `personal/disclosure-strategy/debriefs/debrief-<case>.md`.
-7. **Fold lessons back into the library** — edit the playbooks in
-   `personal/workflows-and-architecture/playbooks/`. This returns you to **step 2**
-   and makes the next case start better.
+7. **Fold lessons back** — into the **library** (`playbooks/`, returns to step 2)
+   *and*, when the learning is bigger than process, into the **vision** (step 0).
+   This is what makes the next case start better.
 
 > …with **one-off debugging** (`teams/disclosure-<case>/one-off-debugging.md`)
 > as needed at any step.

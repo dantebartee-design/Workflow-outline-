@@ -1,5 +1,10 @@
 # Disclosure Strategy *(Chat Project)*
 
+> **Step 0 · the North Star** of the
+> [order of operations](../../README.md#order-of-operations--a-north-star--7-steps).
+> It isn't redone each cycle — it sits *above* the 1–7 loop, informs every step,
+> and is **refined by the debrief** (step 6 feeds back here).
+
 High-level vision and approach for disclosures, ahead of and independent of any
 single case.
 

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Claude Workflow System — Complete Reference</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 18mm 14mm;
+    @bottom-center {
+      content: "Claude Workflow System — Complete Reference   ·   page " counter(page) " of " counter(pages);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 8pt;
+      color: #9aa0ad;
+    }
+  }
+
+  :root {
+    --ink:    #1c2230;
+    --muted:  #5b6472;
+    --line:   #e3e7ee;
+    --bg-soft:#f6f8fb;
+
+    --c0: #7c3aed; /* vision - purple */
+    --c1: #2563eb; /* build - blue */
+    --c2: #0891b2; /* library - cyan */
+    --c3: #d97706; /* review - amber */
+    --c4: #dc2626; /* execution - red */
+    --c5: #4f46e5; /* audit - indigo */
+    --c6: #db2777; /* debrief - pink */
+    --c7: #059669; /* fold back - green */
+    --personal: #2563eb;
+    --teams:    #059669;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    color: var(--ink);
+    font-size: 10.2pt;
+    line-height: 1.5;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3 { line-height: 1.2; }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 55%, #0891b2 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 30px 32px;
+    margin-bottom: 22px;
+  }
+  .cover .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 8.5pt;
+    opacity: .85;
+    margin: 0 0 8px;
+  }
+  .cover h1 {
+    margin: 0 0 10px;
+    font-size: 26pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .cover p {
+    margin: 0;
+    font-size: 10pt;
+    opacity: .92;
+    max-width: 80%;
+  }
+  .cover .meta {
+    margin-top: 16px;
+    font-size: 8.5pt;
+    opacity: .8;
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 6px;
+    columns: 2;
+    column-gap: 28px;
+  }
+  .toc h3 { margin: 0 0 8px; font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); column-span: all; }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc li { margin: 3px 0; font-size: 9.6pt; }
+
+  section { break-inside: avoid-page; }
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 26px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--line);
+  }
+  .sec-num {
+    flex: 0 0 auto;
+    width: 30px; height: 30px;
+    border-radius: 9px;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13pt;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sec-head h2 { margin: 0; font-size: 15pt; font-weight: 800; letter-spacing: -0.3px; }
+
+  p.lead { color: var(--muted); margin: 0 0 12px; }
+
+  /* ---------- Step cards ---------- */
+  .steps { display: flex; flex-direction: column; gap: 7px; }
+  .step {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  .step .badge {
+    flex: 0 0 64px;
+    color: #fff;
+    font-weight: 800;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 8px 4px;
+    text-align: center;
+  }
+  .step .badge .n { font-size: 17pt; line-height: 1; }
+  .step .badge .lbl { font-size: 6.6pt; text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; opacity: .9; }
+  .step .body { padding: 8px 12px; flex: 1; }
+  .step .body .t { font-weight: 700; font-size: 10.6pt; }
+  .step .body .where {
+    display: inline-block;
+    font-size: 7.6pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+    padding: 1px 7px; border-radius: 20px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .step .body .d { color: var(--muted); font-size: 9.4pt; margin-top: 1px; }
+
+  .pill-personal { background: #e8f0fe; color: var(--personal); }
+  .pill-teams    { background: #e6f6ef; color: var(--teams); }
+  .pill-lib      { background: #e2f5f9; color: var(--c2); }
+
+  .loop-note {
+    margin-top: 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid var(--c7);
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-size: 9.5pt;
+  }
+  .loop-note b { color: var(--c7); }
+
+  /* ---------- Two-column world cards ---------- */
+  .worlds { display: flex; gap: 14px; }
+  .world {
+    flex: 1;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  .world .wh { padding: 9px 14px; color: #fff; font-weight: 800; font-size: 11pt; display: flex; align-items: center; gap: 7px; }
+  .world.personal .wh { background: var(--personal); }
+  .world.teams .wh { background: var(--teams); }
+  .world .wrow { padding: 9px 14px; border-top: 1px solid var(--line); }
+  .world .wrow:first-of-type { border-top: none; }
+  .world .wrow .name { font-weight: 700; font-size: 9.8pt; }
+  .world .wrow .type { font-size: 7.4pt; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 1px 7px; border-radius: 20px; margin-left: 5px; }
+  .type-chat   { background: #eef1f6; color: #475569; }
+  .type-cowork { background: #fef3e2; color: var(--c3); }
+  .world .wrow .desc { color: var(--muted); font-size: 9pt; margin-top: 1px; }
+
+  /* ---------- Phase plan ---------- */
+  .phase {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  .phase .ph {
+    padding: 8px 14px;
+    background: var(--bg-soft);
+    font-weight: 800; font-size: 10.4pt;
+    border-left: 5px solid var(--c1);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .phase.p1 .ph { border-color: var(--c1); }
+  .phase.p2 .ph { border-color: var(--c3); }
+  .phase.p3 .ph { border-color: var(--c6); }
+  .phase.p4 .ph { border-color: var(--c7); }
+  .phase .ph .tag { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 700; }
+  .phase ul { margin: 8px 0; padding: 0 14px 4px 14px; list-style: none; }
+  .phase li { position: relative; padding-left: 24px; margin: 5px 0; font-size: 9.6pt; }
+  .phase li::before {
+    content: "";
+    position: absolute; left: 2px; top: 1px;
+    width: 13px; height: 13px;
+    border: 2px solid #c2cad6; border-radius: 4px;
+  }
+  .phase li .sub { color: var(--muted); font-size: 9pt; }
+  .phase li b { font-weight: 700; }
+
+  /* ---------- Folder tree ---------- */
+  .tree {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 8.6pt;
+    line-height: 1.6;
+    white-space: pre;
+    break-inside: avoid;
+  }
+  .tree .root { color: #fff; font-weight: 700; }
+  .tree .per { color: #7dd3fc; font-weight: 700; }
+  .tree .tea { color: #6ee7b7; font-weight: 700; }
+  .tree .lib { color: #fcd34d; font-weight: 700; }
+  .tree .cm { color: #64748b; }
+  .tree .dim { color: #94a3b8; }
+
+  /* ---------- Flow diagram ---------- */
+  .flow {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+    break-inside: avoid;
+  }
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 4px 0; }
+  .node {
+    border-radius: 8px;
+    padding: 6px 11px;
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .node small { display: block; font-weight: 500; font-size: 7pt; opacity: .9; }
+  .arrow { color: #94a3b8; font-size: 13pt; }
+  .arrow-d { color: #94a3b8; font-size: 13pt; text-align: center; width: 100%; }
+
+  /* ---------- Generic tables ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; break-inside: avoid; }
+  th, td { text-align: left; padding: 7px 11px; font-size: 9.4pt; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--bg-soft); font-size: 8.2pt; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+  td b { font-weight: 700; }
+
+  .vs-table th:first-child { width: 18%; }
+  .vs-table td:first-child { font-weight: 700; color: var(--ink); }
+
+  /* ---------- Concept cards ---------- */
+  .concept {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 12px 15px;
+    margin-bottom: 11px;
+    break-inside: avoid;
+  }
+  .concept h3 { margin: 0 0 7px; font-size: 11pt; display: flex; align-items: center; gap: 8px; }
+  .concept h3 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .split { display: flex; gap: 12px; }
+  .split .col { flex: 1; border-radius: 9px; padding: 10px 13px; }
+  .col-clean { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .col-messy { background: #fdf2f8; border: 1px solid #fbcfe8; }
+  .col h4 { margin: 0 0 6px; font-size: 9.2pt; text-transform: uppercase; letter-spacing: .5px; }
+  .col-clean h4 { color: var(--c1); }
+  .col-messy h4 { color: var(--c6); }
+  .col ul { margin: 0; padding-left: 16px; }
+  .col li { font-size: 9.2pt; margin: 3px 0; }
+
+  /* ---------- Value timeline bars ---------- */
+  .tl-grid { display: flex; flex-direction: column; gap: 9px; margin-top: 6px; }
+  .tl-row { display: flex; align-items: center; gap: 10px; break-inside: avoid; }
+  .tl-row .k { flex: 0 0 132px; font-size: 9pt; }
+  .tl-row .k b { display: block; font-size: 9.4pt; }
+  .tl-row .k span { color: var(--muted); font-size: 8pt; }
+  .bar-wrap { flex: 1; background: var(--bg-soft); border-radius: 6px; height: 22px; position: relative; overflow: hidden; }
+  .bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 9px; color: #fff; font-size: 8.4pt; font-weight: 700; white-space: nowrap; }
+  .bar-out { font-size: 8.4pt; font-weight: 700; color: var(--teams); white-space: nowrap; padding-left: 8px; }
+  .bar.no   { background: #ef4444; }
+  .bar.sys  { background: #f59e0b; }
+  .bar.sys2 { background: #eab308; }
+  .bar.sys3 { background: #84cc16; }
+  .bar.auto { background: #10b981; }
+
+  /* ---------- Conversation map ---------- */
+  .cmap { display: flex; flex-direction: column; gap: 10px; }
+  .cgroup { border: 1px solid var(--line); border-radius: 11px; overflow: hidden; break-inside: avoid; }
+  .cgroup .ch { padding: 7px 14px; font-weight: 800; font-size: 10pt; color: #fff; }
+  .cgroup.g1 .ch { background: var(--c7); }
+  .cgroup.g2 .ch { background: var(--c1); }
+  .cgroup.g3 .ch { background: var(--c6); }
+  .cgroup.g4 .ch { background: var(--c3); }
+  .cgroup .crow { display: flex; justify-content: space-between; gap: 12px; padding: 7px 14px; border-top: 1px solid var(--line); font-size: 9.4pt; }
+  .cgroup .crow .q { font-style: italic; }
+  .cgroup .crow .w { flex: 0 0 auto; color: var(--muted); font-weight: 700; font-size: 8.6pt; text-transform: uppercase; letter-spacing: .4px; }
+
+  /* ---------- Vision phases ---------- */
+  .vphase { display: flex; gap: 12px; }
+  .vcard { flex: 1; border: 1px solid var(--line); border-radius: 12px; padding: 13px; break-inside: avoid; position: relative; }
+  .vcard .vn { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; }
+  .vcard.v1 { border-top: 4px solid var(--c1); } .vcard.v1 .vn { color: var(--c1); }
+  .vcard.v2 { border-top: 4px solid var(--c3); } .vcard.v2 .vn { color: var(--c3); }
+  .vcard.v3 { border-top: 4px solid var(--c7); } .vcard.v3 .vn { color: var(--c7); }
+  .vcard h4 { margin: 4px 0 6px; font-size: 11pt; }
+  .vcard p { margin: 0; font-size: 9.2pt; color: var(--muted); }
+
+  .callout {
+    margin-top: 12px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    break-inside: avoid;
+  }
+  .callout .big { font-size: 11.5pt; font-weight: 800; margin-bottom: 8px; }
+  .callout ol { margin: 0; padding-left: 18px; }
+  .callout li { font-size: 9.4pt; margin: 4px 0; }
+  .callout .arrow-line { margin-top: 10px; font-family: 'SF Mono', monospace; font-size: 9pt; color: #6ee7b7; text-align: center; }
+
+  .footer-note { margin-top: 22px; text-align: center; color: var(--muted); font-size: 8.6pt; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="eyebrow">Operating System for Disclosure Work</p>
+  <h1>Claude Workflow System</h1>
+  <p>Complete reference for how work flows from idea → build → run → learn → automate. One place to look, no scrolling through a long chat.</p>
+  <div class="meta">Readable on a phone · Printable on paper · Quick to reference</div>
+</div>
+
+<div class="toc">
+  <h3>Inside this reference</h3>
+  <ol>
+    <li>Workflow Overview</li>
+    <li>Project Structure</li>
+    <li>The Action Plan — In Order</li>
+    <li>Folder Structure</li>
+    <li>Key Concepts</li>
+    <li>Conversation Map</li>
+    <li>Long-term Vision</li>
+  </ol>
+</div>
+
+<!-- 1 -->
+<section>
+  <div class="sec-head"><div class="sec-num">1</div><h2>Workflow Overview</h2></div>
+  <p class="lead"><b>The North Star sits above everything.</b> Step 0 — Vision — informs every other step. Each step bends back to serve it. Then seven steps, in order:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="badge" style="background:var(--c0)"><div class="n">0</div><div class="lbl">Vision ★</div></div>
+      <div class="body"><div class="t">Vision <span class="where pill-lib">North Star</span></div><div class="d">The North Star that informs every step. Why, and toward what.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c1)"><div class="n">1</div><div class="lbl">Build</div></div>
+      <div class="body"><div class="t">Build &amp; Debug <span class="where pill-personal">Personal · Cowork</span></div><div class="d">Messy code lives here. Experiment, break things, iterate.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c2)"><div class="n">2</div><div class="lbl">Promote</div></div>
+      <div class="body"><div class="t">Promote to Library <span class="where pill-lib">→ Workflows &amp; Architecture</span></div><div class="d">When proven, code moves into the library.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c3)"><div class="n">3</div><div class="lbl">Review</div></div>
+      <div class="body"><div class="t">Pre-run Review <span class="where pill-teams">Teams · Chat</span></div><div class="d">Quality gate. Check before you run for real.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c4)"><div class="n">4</div><div class="lbl">Execute</div></div>
+      <div class="body"><div class="t">Execution <span class="where pill-teams">Teams · Cowork</span></div><div class="d">The actual run.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c5)"><div class="n">5</div><div class="lbl">Audit</div></div>
+      <div class="body"><div class="t">Audit <span class="where pill-teams">Teams · Chat</span></div><div class="d">The nuts and bolts of what actually happened.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c6)"><div class="n">6</div><div class="lbl">Debrief</div></div>
+      <div class="body"><div class="t">Debrief <span class="where pill-personal">Personal · Chat</span></div><div class="d">Feelings and learning — the trip home after the audit.</div></div>
+    </div>
+    <div class="step">
+      <div class="badge" style="background:var(--c7)"><div class="n">7</div><div class="lbl">Fold Back</div></div>
+      <div class="body"><div class="t">Fold Lessons Back <span class="where pill-lib">→ Vision + Library</span></div><div class="d">Update the Vision and the Library based on what you learned.</div></div>
+    </div>
+  </div>
+
+  <div class="loop-note">🔁 <b>The loop:</b> Step 7 feeds back into Step 0 (Vision) and Step 2 (Library). The system gets a little smarter every cycle.</div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="sec-head"><div class="sec-num">2</div><h2>Project Structure</h2></div>
+  <p class="lead">Two worlds — <b>Personal</b> and <b>Teams</b>. Within each, two kinds of project: <b>Chat</b> (conversation, thinking, feedback) and <b>Cowork</b> (executable work and code).</p>
+
+  <div class="worlds">
+    <div class="world personal">
+      <div class="wh">👤 Personal</div>
+      <div class="wrow"><div class="name">Disclosure Strategy <span class="type type-chat">Chat</span></div><div class="desc">High-level strategy &amp; thinking</div></div>
+      <div class="wrow"><div class="name">Personal Explorations <span class="type type-chat">Chat</span></div><div class="desc">Open-ended exploration, feelings, learning</div></div>
+      <div class="wrow"><div class="name">Workflows &amp; Architecture <span class="type type-cowork">Cowork</span></div><div class="desc"><b>The library</b> — proven code, playbooks, diagrams</div></div>
+    </div>
+    <div class="world teams">
+      <div class="wh">👥 Teams</div>
+      <div class="wrow"><div class="name">Running Disclosures <span class="type type-chat">Chat</span></div><div class="desc"><b>Master tracker</b> — status across all cases</div></div>
+      <div class="wrow"><div class="name">Disclosure [Case Name] <span class="type type-chat">Chat</span></div><div class="desc">Pre-run review · audit · debugging</div></div>
+      <div class="wrow"><div class="name">Disclosure [Case Name] <span class="type type-cowork">Cowork</span></div><div class="desc">Execution — the actual run</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="sec-head"><div class="sec-num">3</div><h2>The Action Plan — In Order</h2></div>
+
+  <div class="phase p1">
+    <div class="ph">Phase 1 — Cleanup &amp; Foundation <span class="tag">do first</span></div>
+    <ul>
+      <li><b>Create "Claude Cleanup and Reorganization" project</b><br><span class="sub">Audit files · decide keep / move / delete · set up folder structure</span></li>
+      <li><b>Create "Workflows and Architecture" project</b> (the library)<br><span class="sub">Pin this conversation summary · pin the workflow diagram · create the Value Timeline document</span></li>
+    </ul>
+  </div>
+
+  <div class="phase p2">
+    <div class="ph">Phase 2 — Setup Before Next Disclosure <span class="tag">prepare</span></div>
+    <ul>
+      <li><b>Set up folder structure</b> <span class="sub">— Personal and Teams projects</span></li>
+      <li><b>Create "Lawyer Ideas and Requests" project</b> <span class="sub">— Teams Chat</span></li>
+      <li><b>Create Lawyer Playbook Template</b> <span class="sub">— one page, simple</span></li>
+    </ul>
+  </div>
+
+  <div class="phase p3">
+    <div class="ph">Phase 3 — Execution: Disclosure Two &amp; Beyond <span class="tag">run it</span></div>
+    <ul>
+      <li><b>Run Disclosure Two using the new workflow</b><br><span class="sub">Follow North Star + seven steps · document as you go · debrief in Personal · extract the lawyer playbook</span></li>
+      <li><b>After Disclosure Two → update Value Timeline with real data</b></li>
+    </ul>
+  </div>
+
+  <div class="phase p4">
+    <div class="ph">Phase 4 — Optimization: After 2–3 Disclosures <span class="tag">automate</span></div>
+    <ul>
+      <li><b>Design Agent / Automation Strategy</b> <span class="sub">— assess what can be automated</span></li>
+      <li><b>Build &amp; Test First Agent</b> <span class="sub">— lives in Workflows &amp; Architecture, executes the proven playbook</span></li>
+      <li><b>Hand Off to Lawyer</b> <span class="sub">— agent runs autonomously; you review and approve</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="sec-head"><div class="sec-num">4</div><h2>Folder Structure</h2></div>
+
+  <div class="tree"><span class="root">CLAUDE WORKSPACE</span>
+│
+├── <span class="per">👤 PERSONAL</span>
+│   │
+│   ├── 💬 Disclosure Strategy            <span class="cm">[Chat]    strategy &amp; thinking</span>
+│   │
+│   ├── 💬 Personal Explorations          <span class="cm">[Chat]    exploration · feelings · learning</span>
+│   │        <span class="dim">▲ Step 6: Debrief lands here</span>
+│   │
+│   └── 🛠  <span class="lib">Workflows &amp; Architecture</span>      <span class="cm">[Cowork]  ← THE LIBRARY</span>
+│          <span class="dim">├─ pinned: workflow diagram</span>
+│          <span class="dim">├─ pinned: conversation summary</span>
+│          <span class="dim">├─ Value Timeline document</span>
+│          <span class="dim">├─ proven playbooks</span>
+│          <span class="dim">└─ agents (later)</span>
+│
+└── <span class="tea">👥 TEAMS</span>
+    │
+    ├── 💬 Running Disclosures             <span class="cm">[Chat]    ← MASTER TRACKER</span>
+    │
+    ├── 💬 Disclosure [Case Name]          <span class="cm">[Chat]    pre-run · audit · debugging</span>
+    │
+    └── 🛠  Disclosure [Case Name]          <span class="cm">[Cowork]  execution — the actual run</span></div>
+
+  <div class="flow">
+    <div style="text-align:center; font-size:8.4pt; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-weight:700; margin-bottom:10px;">How conversations flow between projects</div>
+    <div class="flow-row"><div class="node" style="background:var(--c0)">★ Vision <small>informs everything below</small></div></div>
+    <div class="arrow-d">▼</div>
+    <div class="flow-row">
+      <div class="node" style="background:var(--c1)">Build <small>Personal · Cowork</small></div>
+      <span class="arrow">→</span>
+      <div class="node" style="background:var(--c2)">Library <small>Workflows &amp; Arch.</small></div>
+      <span class="arrow">→</span>
+      <div class="node" style="background:var(--c3)">Pre-run Review <small>Teams · Chat</small></div>
+      <span class="arrow">→</span>
+      <div class="node" style="background:var(--c4)">Execution <small>Teams · Cowork</small></div>
+    </div>
+    <div class="arrow-d">▼</div>
+    <div class="flow-row">
+      <div class="node" style="background:var(--c5)">Audit <small>Teams · Chat</small></div>
+      <span class="arrow">→</span>
+      <div class="node" style="background:var(--c6)">Debrief <small>Personal · Chat</small></div>
+      <span class="arrow">→</span>
+      <div class="node" style="background:var(--c7)">Fold Back <small>→ Vision + Library</small></div>
+    </div>
+    <div class="arrow-d">▼</div>
+    <div class="flow-row"><div class="node" style="background:#475569">Running Disclosures — Master Tracker <small>watches every case end-to-end</small></div></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="sec-head"><div class="sec-num">5</div><h2>Key Concepts</h2></div>
+
+  <div class="concept">
+    <h3><span class="dot" style="background:var(--c3)"></span>Cowork vs. Chat</h3>
+    <table>
+      <tr><th></th><th>Cowork</th><th>Chat</th></tr>
+      <tr><td><b>What</b></td><td>Executable, actionable work</td><td>Conversation, thinking, feedback</td></tr>
+      <tr><td><b>Contains</b></td><td>Code or structure you'll reuse</td><td>Linear discussion</td></tr>
+      <tr><td><b>Reused?</b></td><td>Yes — pulled into other work</td><td>No — doesn't need pulling elsewhere</td></tr>
+    </table>
+  </div>
+
+  <div class="concept">
+    <h3><span class="dot" style="background:var(--c1)"></span>Projects vs. Random Chats</h3>
+    <table>
+      <tr><th></th><th>Projects</th><th>Random Chats</th></tr>
+      <tr><td><b>Shape</b></td><td>Grouped, related conversations</td><td>One-off, standalone</td></tr>
+      <tr><td><b>Theme</b></td><td>One theme, referenced repeatedly</td><td>No ongoing theme</td></tr>
+      <tr><td><b>Use when</b></td><td>You'll come back to it</td><td>You won't</td></tr>
+    </table>
+  </div>
+
+  <div class="concept">
+    <h3><span class="dot" style="background:var(--c6)"></span>The Lawyer Playbook Separation</h3>
+    <p class="lead" style="margin-bottom:9px;">Keep the clean front-stage separate from the messy back-stage.</p>
+    <div class="split">
+      <div class="col col-clean">
+        <h4>What the lawyer sees</h4>
+        <ul><li>Clean deliverable</li><li>Simple playbook</li><li>Status updates</li></ul>
+      </div>
+      <div class="col col-messy">
+        <h4>What you build internally</h4>
+        <ul><li>All the iterations</li><li>The debates</li><li>The cleanup</li><li>The learning</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h3><span class="dot" style="background:var(--c7)"></span>The Value Timeline</h3>
+    <p class="lead" style="margin-bottom:10px;">Three timelines side by side — the case for the system. The line bends down; without the system, it never does.</p>
+    <div class="tl-grid">
+      <div class="tl-row"><div class="k"><b>No System</b><span>before · every time</span></div><div class="bar-wrap"><div class="bar no" style="width:100%">12–15 hrs / disclosure — flat, forever</div></div></div>
+      <div class="tl-row"><div class="k"><b>System · D1</b><span>building</span></div><div class="bar-wrap"><div class="bar sys" style="width:80%">12 hrs</div></div></div>
+      <div class="tl-row"><div class="k"><b>System · D2</b><span>refining</span></div><div class="bar-wrap"><div class="bar sys2" style="width:40%">6 hrs</div></div></div>
+      <div class="tl-row"><div class="k"><b>System · D3</b><span>executing</span></div><div class="bar-wrap"><div class="bar sys3" style="width:27%">4 hrs</div></div></div>
+      <div class="tl-row"><div class="k"><b>Automation · D4+</b><span>runs autonomously</span></div><div class="bar-wrap" style="display:flex;align-items:center;"><div class="bar auto" style="width:6%">&nbsp;</div><div class="bar-out">30 min to trigger</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <div class="sec-head"><div class="sec-num">6</div><h2>Conversation Map</h2></div>
+  <p class="lead">Which conversations to have, when, and where.</p>
+
+  <div class="cmap">
+    <div class="cgroup g1">
+      <div class="ch">🟢 Start Next</div>
+      <div class="crow"><span class="q">"I need to clean up my Claude files"</span><span class="w">Cleanup project</span></div>
+      <div class="crow"><span class="q">"Help me document the disclosure workflow"</span><span class="w">Workflows &amp; Architecture</span></div>
+      <div class="crow"><span class="q">"Help me create a folder structure template"</span><span class="w">Claude Code</span></div>
+    </div>
+    <div class="cgroup g2">
+      <div class="ch">🔵 Start After Cleanup</div>
+      <div class="crow"><span class="q">"Help me organize the lawyer's requests"</span><span class="w">Lawyer Ideas &amp; Requests</span></div>
+      <div class="crow"><span class="q">"Help me create a playbook template"</span><span class="w">For the lawyer</span></div>
+    </div>
+    <div class="cgroup g3">
+      <div class="ch">🟣 Start With Disclosure Two</div>
+      <div class="crow"><span class="q">"Let's run disclosure two using the new workflow"</span><span class="w">Actual work</span></div>
+      <div class="crow"><span class="q">"Help me debrief"</span><span class="w">Personal</span></div>
+      <div class="crow"><span class="q">"Help me package the value"</span><span class="w">For the lawyer</span></div>
+    </div>
+    <div class="cgroup g4">
+      <div class="ch">🟠 Start After 2–3 Disclosures</div>
+      <div class="crow"><span class="q">"Help me design automation"</span><span class="w">Agents &amp; API strategy</span></div>
+      <div class="crow"><span class="q">"Help me build an agent"</span><span class="w">Actual agent building</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <div class="sec-head"><div class="sec-num">7</div><h2>Long-term Vision</h2></div>
+  <p class="lead">The automation path — three phases. You don't skip ahead.</p>
+
+  <div class="vphase">
+    <div class="vcard v1"><div class="vn">Phase 1</div><h4>Do it manually</h4><p>You're doing disclosures by hand. Learning the process, documenting it, debriefing.</p></div>
+    <div class="vcard v2"><div class="vn">Phase 2</div><h4>Build the playbook</h4><p>You've done it a few times. You have a solid, proven playbook.</p></div>
+    <div class="vcard v3"><div class="vn">Phase 3</div><h4>Teach an agent</h4><p>Using the Agent SDK and your API key, an agent follows that proven playbook.</p></div>
+  </div>
+
+  <div class="callout">
+    <div class="big">The agent doesn't invent the process — it executes the one you've proven works.</div>
+    <ol>
+      <li>Agents live in <b>Workflows &amp; Architecture</b> — but only <b>after</b> you've proven the manual process.</li>
+      <li>The agent is the <b>automation version of a playbook that already exists.</b> No playbook, no agent.</li>
+    </ol>
+    <div class="arrow-line">Manual proof ──► Playbook ──► Agent &nbsp;&nbsp;(never the other way around)</div>
+  </div>
+
+  <div class="footer-note">Update this reference in <b>Workflows &amp; Architecture</b> whenever Step 7 folds new lessons back in.</div>
+</section>
+
+</body>
+</html>

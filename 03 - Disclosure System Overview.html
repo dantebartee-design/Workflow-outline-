@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Disclosure System — Overview &amp; Desk Reference</title>
+<style>
+  :root {
+    --navy:#0f2a47; --navy2:#1e4d7b;
+    --holly:#0e7c86; --holly-bg:#e1f3f0;
+    --dante:#2563eb; --dante-bg:#e8f0fe;
+    --gold:#b07b1e; --gold-bg:#fbf0d9; --gold-bd:#ecd9a8;
+    --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+    --stage1:#2563eb; --stage2:#7c3aed; --stage3:#0e7c86; --done:#059669;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body {
+    font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink);
+    background:#eef1f5; font-size:10.5pt; line-height:1.45; padding:24px;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { max-width:1000px; margin:0 auto; background:#fff; border-radius:16px; padding:28px 32px; box-shadow:0 2px 18px rgba(15,42,71,.08); }
+
+  header.top { text-align:center; margin-bottom:18px; }
+  header.top .eyebrow { text-transform:uppercase; letter-spacing:3px; font-size:8pt; color:var(--gold); font-weight:800; }
+  header.top h1 { margin:5px 0 3px; font-size:22pt; color:var(--navy); }
+  header.top p { margin:0; color:var(--muted); font-size:10pt; }
+
+  .sec { margin-top:20px; }
+  .sec-h { display:flex; align-items:center; gap:9px; margin-bottom:11px; }
+  .sec-h .num { width:25px; height:25px; border-radius:7px; background:var(--navy); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt; }
+  .sec-h h2 { margin:0; font-size:14pt; color:var(--navy); }
+
+  /* ---- naming convention ---- */
+  .name-card { border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--bg); }
+  .name-example {
+    font-family:'SF Mono','Consolas',monospace; font-size:14pt; font-weight:700;
+    background:#fff; border:2px dashed var(--gold-bd); border-radius:10px; padding:13px 16px; text-align:center; color:var(--navy);
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+  }
+  .name-example .p { padding:2px 6px; border-radius:5px; }
+  .pe-date { background:#dbeafe; color:#1d4ed8; }
+  .pe-desc { background:#ede9fe; color:#6d28d9; }
+  .pe-init { background:var(--gold-bg); color:#7a5512; }
+
+  .legend-row { display:flex; gap:10px; justify-content:center; margin-top:11px; flex-wrap:wrap; font-size:8.6pt; }
+  .legend-row .lg { display:flex; align-items:center; gap:6px; }
+  .legend-row .dot { width:11px; height:11px; border-radius:3px; }
+
+  .rules { margin:13px 0 0; padding:0; list-style:none; columns:2; column-gap:24px; }
+  .rules li { font-size:9.3pt; margin:4px 0; padding-left:17px; position:relative; break-inside:avoid; }
+  .rules li::before { content:"▸"; color:var(--gold); position:absolute; left:0; font-weight:700; }
+  .rules li b { color:var(--navy); }
+
+  /* ---- folder hierarchy + flow ---- */
+  .flowwrap { display:grid; grid-template-columns:1fr 1.15fr; gap:20px; align-items:start; }
+
+  .tree { background:var(--navy); color:#e8eef5; border-radius:12px; padding:15px 16px; font-family:'SF Mono','Consolas',monospace; font-size:8pt; line-height:1.85; white-space:pre; overflow-x:auto; }
+  .tree .fdr { font-weight:700; }
+  .tree .root { color:#fff; }
+  .tree .s1 { color:#93c5fd; } .tree .s2 { color:#c4b5fd; } .tree .s3 { color:#5eead4; } .tree .s4 { color:#6ee7b7; }
+  .tree .sub { color:#fcd34d; }
+  .tree .cm { color:#7e93ab; font-size:8.4pt; }
+
+  /* pipeline */
+  .pipe { display:flex; flex-direction:column; gap:10px; }
+  .stage { border-radius:11px; padding:11px 14px; color:#fff; position:relative; }
+  .stage .st { font-size:7.6pt; text-transform:uppercase; letter-spacing:1.5px; opacity:.9; }
+  .stage .nm { font-weight:800; font-size:11pt; }
+  .stage .ds { font-size:8.8pt; opacity:.95; margin-top:2px; }
+  .stage.s1 { background:var(--stage1); }
+  .stage.s2 { background:var(--stage2); }
+  .stage.s3 { background:var(--stage3); }
+  .stage.s4 { background:var(--done); }
+  .stage .att { margin-top:7px; background:rgba(255,255,255,.18); border-radius:7px; padding:5px 9px; font-size:8.4pt; }
+  .down { text-align:center; color:var(--gold); font-size:15pt; line-height:.5; font-weight:700; }
+  .clio { text-align:center; border:2px dashed var(--navy2); border-radius:10px; padding:9px; font-size:9pt; color:var(--navy); background:#f8fafc; }
+  .clio b { color:var(--navy2); }
+
+  /* ---- revision tracking ---- */
+  .rev { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .rev .rh { background:var(--gold-bg); padding:8px 15px; font-weight:800; color:#7a5512; font-size:9.5pt; border-bottom:1px solid var(--gold-bd); }
+  .rev table { width:100%; border-collapse:collapse; }
+  .rev th, .rev td { text-align:left; padding:8px 14px; font-size:9.2pt; border-bottom:1px solid var(--line); vertical-align:top; }
+  .rev th { background:var(--bg); font-size:7.8pt; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); }
+  .rev td.fn { font-family:'SF Mono','Consolas',monospace; font-size:8.7pt; color:var(--navy); white-space:nowrap; }
+  .rev .who { font-weight:700; }
+  .rev .who.d { color:var(--dante); } .rev .who.l { color:var(--holly); }
+  .rev tr:last-child td { border-bottom:none; }
+
+  .note-tip { margin-top:11px; background:var(--holly-bg); border-left:4px solid var(--holly); border-radius:0 9px 9px 0; padding:9px 14px; font-size:9pt; }
+  .note-tip b { color:var(--holly); }
+
+  @media print {
+    body { background:#fff; padding:0; }
+    .page { box-shadow:none; border-radius:0; max-width:none; padding:8mm 10mm; }
+    @page { size:A4 portrait; margin:9mm; }
+    .sec { break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">Disclosure System · Desk Reference</div>
+    <h1>File Naming, Folders &amp; Revision Tracking</h1>
+    <p>Print this and keep it at your desk. One page, everything you need to file a disclosure correctly.</p>
+  </header>
+
+  <!-- 1. NAMING -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">1</div><h2>Ground rules — file naming</h2></div>
+    <div class="name-card">
+      <div class="name-example">
+        <span class="p pe-date">20260601</span>
+        <span class="p pe-desc">initial disclosure statement</span>
+        <span class="p pe-init">(D L)</span>
+      </div>
+      <div class="legend-row">
+        <span class="lg"><span class="dot" style="background:#dbeafe"></span><b>Date</b> — YYYYMMDD (1 June 2026)</span>
+        <span class="lg"><span class="dot" style="background:#ede9fe"></span><b>Description</b> — what the document is</span>
+        <span class="lg"><span class="dot" style="background:var(--gold-bg)"></span><b>Initials</b> — who has touched it</span>
+      </div>
+      <ul class="rules">
+        <li><b>Date first, always.</b> YYYYMMDD keeps files in chronological order automatically.</li>
+        <li><b>Plain description</b> in lowercase — say what it is, no codes.</li>
+        <li><b>Initials in parentheses</b> track revisions: <b>(D)</b> = Dante drafted, <b>(D&nbsp;L)</b> = Dante drafted, Lawyer reviewed.</li>
+        <li><b>Add initials, don't replace.</b> The trail grows left-to-right as people touch it.</li>
+        <li><b>One document, one name</b> — update the same file; don't spawn "final_final_v3".</li>
+        <li><b>No special characters</b> beyond spaces and the parentheses.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. FOLDERS + FLOW -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">2</div><h2>Folder structure &amp; how documents flow</h2></div>
+    <div class="flowwrap">
+      <div class="tree"><span class="root fdr">📁 SHARED</span>
+│
+├─ <span class="s1 fdr">📁 To Be Disclosed</span>   <span class="cm"># drafts in progress</span>
+│
+├─ <span class="s3 fdr">📁 Disclosures</span>       <span class="cm"># under review / ready</span>
+│   └─ <span class="sub fdr">📁 Attachments</span>   <span class="cm"># exhibits & annexes</span>
+│
+└─ <span class="s4 fdr">📁 Done</span>             <span class="cm"># finalised & filed</span>
+
+<span class="cm">────────────────────────</span>
+<span class="cm">Final copy then exported →</span>
+<span class="s2 fdr">📦 CLIO</span> <span class="cm">(system of record)</span></div>
+
+      <div class="pipe">
+        <div class="stage s1"><div class="st">Stage 1 · Drafting</div><div class="nm">To Be Disclosed</div><div class="ds">Document is created and named <b>(D)</b> or <b>(L)</b>. Lives here while it's being written.</div></div>
+        <div class="down">▼</div>
+        <div class="stage s3"><div class="st">Stage 2 · Review</div><div class="nm">Disclosures</div><div class="ds">Moved here once a draft is ready for review and approval.<div class="att">↳ <b>Attachments</b> subfolder holds every exhibit &amp; annex for this disclosure.</div></div></div>
+        <div class="down">▼</div>
+        <div class="stage s4"><div class="st">Stage 3 · Complete</div><div class="nm">Done</div><div class="ds">Approved &amp; finalised. Nothing changes after it lands here.</div></div>
+        <div class="down">▼</div>
+        <div class="clio">Final copy exported to <b>Clio</b> — the system of record — then filed / served.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. REVISION TRACKING -->
+  <div class="sec">
+    <div class="sec-h"><div class="num">3</div><h2>Revision tracking — how the trail builds</h2></div>
+    <div class="rev">
+      <div class="rh">Example: one document's life, start to finish</div>
+      <table>
+        <tr><th>Filename</th><th>Who &amp; what</th><th>Note added</th></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D)</td><td><span class="who d">Dante</span> — first draft</td><td>“First pass from template — flagged 2 gaps for Holly.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L)</td><td><span class="who l">Holly</span> — reviewed</td><td>“Tightened para 3; confirm exhibit B date.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L D)</td><td><span class="who d">Dante</span> — revised</td><td>“Para 3 updated; exhibit B date confirmed 28/05.”</td></tr>
+        <tr><td class="fn">20260601 initial disclosure statement (D L D L)</td><td><span class="who l">Holly</span> — approved ✓</td><td>“Approved. Move to Done &amp; export to Clio.”</td></tr>
+      </table>
+    </div>
+    <div class="note-tip"><b>How notes get added:</b> keep a short note with each change — a comment in the doc, or a one-line entry in a running log. The initials in the filename tell you <i>who</i> last touched it; the note tells you <i>what</i> changed. Together they are the revision history, no version-number guessing required.</div>
+  </div>
+</div>
+</body>
+</html>

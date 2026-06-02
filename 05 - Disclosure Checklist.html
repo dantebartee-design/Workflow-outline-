@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Disclosure Checklist</title>
+<style>
+  :root {
+    --navy:#0f2a47; --navy2:#1e4d7b;
+    --holly:#0e7c86; --holly-bg:#e1f3f0;
+    --dante:#2563eb; --dante-bg:#e8f0fe;
+    --gold:#b07b1e; --gold-bg:#fbf0d9; --gold-bd:#ecd9a8;
+    --done:#059669;
+    --ink:#1f2733; --muted:#5a6675; --line:#e2e7ee; --bg:#f6f8fb;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body {
+    font-family:'Helvetica Neue','Segoe UI',Arial,sans-serif; color:var(--ink);
+    background:#eef1f5; font-size:10pt; line-height:1.4; padding:24px;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { max-width:880px; margin:0 auto; background:#fff; border-radius:16px; padding:28px 34px; box-shadow:0 2px 18px rgba(15,42,71,.08); }
+
+  header.top { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid var(--navy); padding-bottom:12px; margin-bottom:14px; }
+  header.top .eyebrow { text-transform:uppercase; letter-spacing:3px; font-size:7.5pt; color:var(--gold); font-weight:800; }
+  header.top h1 { margin:4px 0 0; font-size:21pt; color:var(--navy); letter-spacing:-.3px; }
+  header.top .right { text-align:right; font-size:8pt; color:var(--muted); }
+
+  /* fill-in matter strip */
+  .matter { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+  .matter .f { font-size:8.5pt; }
+  .matter .f .lab { text-transform:uppercase; letter-spacing:.6px; font-size:7pt; color:var(--muted); font-weight:700; }
+  .matter .f .ln { border-bottom:1.5px solid var(--line); height:18px; }
+
+  .intro-note { background:var(--gold-bg); border-left:4px solid var(--gold); border-radius:0 8px 8px 0; padding:8px 13px; font-size:8.6pt; margin-bottom:16px; }
+  .intro-note b { color:#7a5512; }
+
+  /* two-column layout of groups */
+  .grid { columns:2; column-gap:22px; }
+  .grp { break-inside:avoid; border:1px solid var(--line); border-radius:11px; margin-bottom:13px; overflow:hidden; }
+  .grp .gh { display:flex; align-items:center; gap:8px; padding:7px 12px; font-weight:800; font-size:9.6pt; color:#fff; }
+  .grp .gh .gn { width:19px; height:19px; border-radius:6px; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:9pt; }
+  .grp.g1 .gh { background:var(--navy2); }
+  .grp.g2 .gh { background:var(--dante); }
+  .grp.g3 .gh { background:#7c3aed; }
+  .grp.g4 .gh { background:var(--gold); }
+  .grp.g5 .gh { background:var(--holly); }
+  .grp.g6 .gh { background:var(--done); }
+
+  ul.ck { list-style:none; margin:0; padding:7px 12px 9px; }
+  ul.ck li { position:relative; padding:4px 0 4px 24px; font-size:9pt; border-bottom:1px dashed var(--line); }
+  ul.ck li:last-child { border-bottom:none; }
+  ul.ck li::before { content:""; position:absolute; left:0; top:4px; width:13px; height:13px; border:1.7px solid var(--navy2); border-radius:3.5px; background:#fff; }
+  ul.ck li b { color:var(--navy); }
+  ul.ck li .fn { font-family:'SF Mono','Consolas',monospace; font-size:8pt; background:var(--gold-bg); color:#7a5512; padding:0 5px; border-radius:4px; }
+  ul.ck li .fold { font-weight:700; color:var(--navy2); }
+
+  /* sign-off footer */
+  .signoff { margin-top:6px; border:1px solid var(--line); border-radius:11px; padding:12px 16px; background:var(--bg); break-inside:avoid; }
+  .signoff h3 { margin:0 0 10px; font-size:9pt; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); }
+  .signoff .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; }
+  .signoff .sf .lab { font-size:7.5pt; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); font-weight:700; }
+  .signoff .sf .ln { border-bottom:1.5px solid var(--navy2); height:26px; }
+
+  .foot { margin-top:12px; text-align:center; font-size:8pt; color:var(--muted); font-style:italic; }
+
+  @media print {
+    body { background:#fff; padding:0; font-size:9.6pt; }
+    .page { box-shadow:none; border-radius:0; max-width:none; padding:9mm 11mm; }
+    @page { size:A4 portrait; margin:0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Disclosure Workflow · Quality Gate</div>
+      <h1>Disclosure Checklist</h1>
+    </div>
+    <div class="right">Use at the <b>self-review</b> step,<br>before a document moves to Disclosures.<br>Tick every box. If one can't be ticked, it isn't ready.</div>
+  </header>
+
+  <div class="matter">
+    <div class="f"><div class="lab">Matter / case</div><div class="ln"></div></div>
+    <div class="f"><div class="lab">Document</div><div class="ln"></div></div>
+    <div class="f"><div class="lab">Filename</div><div class="ln"></div></div>
+    <div class="f"><div class="lab">Date</div><div class="ln"></div></div>
+  </div>
+
+  <div class="intro-note"><b>How to use:</b> work top-to-bottom. The process boxes (naming, folders, sign-off) are non-negotiable. The substantive items are prompts — final judgement on legal sufficiency always rests with the lawyer.</div>
+
+  <div class="grid">
+
+    <div class="grp g1">
+      <div class="gh"><span class="gn">1</span> Intake &amp; setup</div>
+      <ul class="ck">
+        <li>Matter is open in <b>Clio</b>; correct client &amp; matter confirmed.</li>
+        <li>Disclosure <b>type</b> and <b>deadline</b> identified and noted.</li>
+        <li>All source documents gathered into the working space.</li>
+        <li>Working from the approved <b>template / playbook</b>.</li>
+      </ul>
+    </div>
+
+    <div class="grp g2">
+      <div class="gh"><span class="gn">2</span> Naming &amp; filing</div>
+      <ul class="ck">
+        <li>Named to convention: <span class="fn">YYYYMMDD description (initials)</span></li>
+        <li>Date is first; description is plain lowercase.</li>
+        <li>Initials reflect who has touched it, e.g. <span class="fn">(D)</span> / <span class="fn">(D L)</span>.</li>
+        <li>Saved in the correct folder for its <b>stage</b>.</li>
+        <li>One file — no duplicate "final_v3" versions.</li>
+      </ul>
+    </div>
+
+    <div class="grp g3">
+      <div class="gh"><span class="gn">3</span> Content &amp; accuracy</div>
+      <ul class="ck">
+        <li>All required <b>sections</b> present and complete.</li>
+        <li>Party names, dates &amp; references correct throughout.</li>
+        <li>Figures &amp; facts verified against the <b>source</b>.</li>
+        <li>Cross-references and exhibit labels match the text.</li>
+        <li>No placeholder text, brackets, or "TBC" left in.</li>
+        <li>Read end-to-end at least once.</li>
+      </ul>
+    </div>
+
+    <div class="grp g4">
+      <div class="gh"><span class="gn">4</span> Exhibits &amp; attachments</div>
+      <ul class="ck">
+        <li>Every exhibit referenced is actually attached.</li>
+        <li>Stored in <span class="fold">📁 Disclosures / Attachments</span>.</li>
+        <li>Each exhibit labelled and dated correctly.</li>
+        <li>No stray, duplicate, or privileged docs included.</li>
+      </ul>
+    </div>
+
+    <div class="grp g5">
+      <div class="gh"><span class="gn">5</span> Review &amp; revision trail</div>
+      <ul class="ck">
+        <li>A short <b>note</b> recorded for each significant change.</li>
+        <li>Initials <b>appended</b> (not replaced) after your edits.</li>
+        <li>Outstanding questions flagged or resolved.</li>
+        <li>Any handoff back to the other person is noted.</li>
+      </ul>
+    </div>
+
+    <div class="grp g6">
+      <div class="gh"><span class="gn">6</span> Approval &amp; filing</div>
+      <ul class="ck">
+        <li>Lawyer review complete; <b>final approval</b> recorded in the filename.</li>
+        <li>No tracked changes or comments left in the final.</li>
+        <li>Moved to <span class="fold">📁 Done</span> — locked, no further edits.</li>
+        <li>Final copy <b>exported to Clio</b> (system of record).</li>
+        <li>Filed / served by the deadline; confirmation saved to the matter.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="signoff">
+    <h3>Sign-off</h3>
+    <div class="row">
+      <div class="sf"><div class="lab">Prepared by</div><div class="ln"></div></div>
+      <div class="sf"><div class="lab">Reviewed / approved by</div><div class="ln"></div></div>
+      <div class="sf"><div class="lab">Date approved</div><div class="ln"></div></div>
+    </div>
+  </div>
+
+  <div class="foot">Disclosure Checklist · companion to the Master Playbook · tick at the self-review gate before any document leaves “To Be Disclosed”.</div>
+</div>
+</body>
+</html>
